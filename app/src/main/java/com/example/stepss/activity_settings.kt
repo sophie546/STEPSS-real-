@@ -27,7 +27,7 @@
 
             // Handle Back Arrow Click
             backArrow.setOnClickListener {
-                redirectToLogin()
+                redirectToLandingPage()
             }
 
             // Handle About Developers Click
@@ -58,8 +58,8 @@
             dialog.show()
         }
 
-        private fun redirectToLogin() {
-            val intent = Intent(this, LoginActivity::class.java)
+        private fun redirectToLandingPage() {
+            val intent = Intent(this, LandingPageActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Clears backstack
             startActivity(intent)
             finish()

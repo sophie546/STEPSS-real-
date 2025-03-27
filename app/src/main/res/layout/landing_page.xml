@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3e3e3e">
+    <!-- Top Bar Menu -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="0dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp">
+
+        <!-- Profile Button -->
+        <ImageButton
+            android:id="@+id/profile_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/profile_picture"
+            android:background="@drawable/circle_shape"
+            android:scaleType="centerCrop"
+            android:clipToOutline="true"
+            android:contentDescription="Profile button"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Name and Age -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp">
+
+            <TextView
+                android:id="@+id/Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zander Aligato"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/age_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20 yrs · Philippines"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <!-- Burger Icon and Sliding Menu -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <!-- Burger Icon -->
+            <ImageButton
+                android:id="@+id/burger_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/burger_icon"
+                android:background="@android:color/transparent"
+                android:contentDescription="Burger Menu"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Sliding Navigation Menu -->
+            <LinearLayout
+                android:id="@+id/navigation_menu"
+                android:orientation="vertical"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:elevation="8dp"
+                android:padding="8dp"
+                android:visibility="gone"
+                android:layout_gravity="end"
+                android:translationX="200dp">
+
+                <Button
+                    android:id="@+id/btn_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Settings" />
+
+                <Button
+                    android:id="@+id/btn_about_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="About Us" />
+
+                <Button
+                    android:id="@+id/btn_log_out"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Log Out" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+
+    <!-- Progress Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/rounded_bg"
+        android:gravity="center_vertical">
+
+        <!-- Text Container -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Progress"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Progress isn’t always loud, but it’s always there. Stay steady and unstoppable! "
+                android:textColor="@color/white"
+                android:maxLines="3"
+                android:ellipsize="end"/>
+        </LinearLayout>
+
+        <!-- Image -->
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/progressring_img"/>
+    </LinearLayout>
+
+    <!-- Featured Tips-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Featured Tips"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/white" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/rounded_bg"
+        android:gravity="center_vertical">
+        <!-- Hydration x 5x a Day -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="20dp"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hydration"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:layout_marginRight="150dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5x a day"
+                android:textSize="15sp"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:src="@drawable/water"/>
+    </LinearLayout>
+
+    <!-- Nav Bar -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/rounded_bg"
+        android:layout_gravity="center"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <ImageButton
+            android:id="@+id/button_home"
+            android:background="@drawable/home_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="Profile button"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <ImageButton
+            android:id="@+id/button_progress"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background = "@drawable/progress_icon"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="Profile button"
+            android:clickable="true"
+            android:focusable="true"
+            />
+
+        <ImageButton
+            android:id="@+id/button_start"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/add_icon"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            android:contentDescription="Profile button"
+            android:clickable="true"
+            android:focusable="true"
+            />
+
+        <ImageButton
+            android:id="@+id/button_recovery"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background = "@drawable/recovery_icon"
+            android:layout_marginLeft="25dp"/>
+
+        <ImageButton
+            android:id="@+id/button_music"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background = "@drawable/spotify_icon"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="Profile button"
+            android:clickable="true"
+            android:focusable="true"
+            />
+    </LinearLayout>
+</LinearLayout>

@@ -5,9 +5,9 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 
 class Activity_profiles_page : Activity() {
     private lateinit var textViewName: TextView
@@ -24,6 +24,13 @@ class Activity_profiles_page : Activity() {
         textViewEmail = findViewById(R.id.edit_email)
         textViewTitle = findViewById(R.id.edit_title)
         textViewAddress = findViewById(R.id.edit_location)
+
+        //error here
+        val backArrow: ImageView = findViewById(R.id.back_button)
+        backArrow.setOnClickListener{
+            val intent = Intent(this,LandingPageActivity::class.java)
+            startActivity(intent)
+        }
 
         val logoutButton: Button = findViewById(R.id.logout_button)
         val editProfile: LinearLayout = findViewById(R.id.edit_profile)

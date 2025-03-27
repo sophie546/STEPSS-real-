@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3e3e3e"
+    android:padding="0dp">
+
+    <ImageView
+        android:id="@+id/welcome_page_image"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center"
+        android:src="@drawable/peoplewalking" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        android:gravity="start"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="Welcome to Stepps!"
+        android:textSize="25sp"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="20dp"
+        android:gravity="start" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="30dp">
+
+        <Button
+            android:id="@+id/button_RegisterOrLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:padding="10dp"
+            android:text="Register or Login"
+            android:textSize="24sp"
+            app:cornerRadius="8dp"
+            android:backgroundTint="#6d98bd" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="or"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/button_VisitAsGuest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Visit as Guest"
+            android:textSize="24sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:padding="10dp"
+            app:cornerRadius="8dp"
+            app:strokeWidth="2dp"
+            app:strokeColor="#6d98bd"
+            app:backgroundTint="@android:color/transparent"
+            app:rippleColor="@android:color/transparent" />
+    </LinearLayout>
+</LinearLayout>
