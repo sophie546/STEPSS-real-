@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#063b4d">
+
+   <ImageView
+       android:layout_width="match_parent"
+       android:layout_height="410dp"
+       android:src ="@drawable/port2"
+       android:layout_gravity="center"/>
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Hello!"
+       android:textSize="35sp"
+       android:layout_gravity="left"
+       android:layout_marginLeft="20dp"
+       android:textColor="@color/white"
+       android:layout_marginTop="8dp"
+       android:textStyle="bold" />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Welcome to MindWalk!"
+       android:textSize="20sp"
+       android:layout_gravity="left"
+       android:layout_marginLeft="20dp"
+       android:textColor="@color/white"
+       />
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+
+      <Button
+          android:id="@+id/login"
+          android:layout_width="340dp"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:layout_weight="1"
+          android:text="Login"
+          android:layout_margin="20dp"
+          android:textSize="25sp"
+          android:textColor="@color/black"
+          android:backgroundTint="#ffc801"/>
+
+</LinearLayout>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="⎯⎯⎯⎯⎯⎯⎯⎯    or ⎯⎯⎯⎯⎯⎯⎯⎯"
+       android:textSize="20sp"
+       android:layout_gravity="left"
+       android:layout_marginLeft="20dp"
+       android:textColor="@color/white"
+       />
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+
+      <Button
+
+          android:layout_width="340dp"
+          android:layout_height="wrap_content"
+          android:layout_marginVertical="10dp"
+          android:layout_weight="1"
+          android:text="Visit as Guest"
+          android:layout_margin="20dp"
+          android:textSize="25sp"
+          android:textColor="@color/black"
+          android:backgroundTint="#ffc801"/>
+
+   </LinearLayout>
+
+
+</LinearLayout>

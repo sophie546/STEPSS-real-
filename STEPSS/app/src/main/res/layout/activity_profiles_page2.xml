@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="20dp">
+
+    <!-- Top Bar -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="10dp"
+        android:padding="12dp"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/leftarrow"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <!-- Profile Picture Section -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/profile_picture"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circle_border"
+            android:elevation="5dp"/>
+
+        <ImageView
+            android:id="@+id/edit_profile_picture"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/editpfp"
+            android:elevation="3dp"
+            android:layout_gravity="end|bottom"
+            android:padding="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"/>
+    </FrameLayout>
+
+    <!-- Editable Fields -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_bg"
+        android:elevation="10dp"
+        android:padding="15dp">
+
+        <!-- Name Field -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/input_field_background"
+            android:padding="10dp"
+            android:elevation="3dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/names"
+                android:layout_marginEnd="10dp"/>
+
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your name"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@null"
+                android:padding="10dp"/>
+        </LinearLayout>
+
+        <!-- Email Field -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/input_field_background"
+            android:padding="10dp"
+            android:elevation="3dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/email"
+                android:layout_marginEnd="10dp"/>
+
+            <EditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your email"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@null"
+                android:padding="10dp"/>
+        </LinearLayout>
+
+        <!-- Title Field -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/input_field_background"
+            android:padding="10dp"
+            android:elevation="3dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/title"
+                android:layout_marginEnd="10dp"/>
+
+            <EditText
+                android:id="@+id/edit_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@null"
+                android:padding="10dp"/>
+        </LinearLayout>
+
+        <!-- Location Field -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/input_field_background"
+            android:padding="10dp"
+            android:elevation="3dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/location"
+                android:layout_marginEnd="10dp"/>
+
+            <EditText
+                android:id="@+id/edit_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your location"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@null"
+                android:padding="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#2DAA9E"
+        android:elevation="10dp"
+        android:radius="30dp"
+        android:text="Save"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+</LinearLayout>
