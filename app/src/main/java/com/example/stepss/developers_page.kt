@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 
 
 class developers_page : Activity() {
@@ -12,12 +13,13 @@ class developers_page : Activity() {
         setContentView(R.layout.activity_developers_page)
 
         // Home Button
-        val buttonHome: Button = findViewById(R.id.btn_home) // Ensure this ID exists in XML
+        val buttonHome: ImageView = findViewById(R.id.back_button) // Ensure this ID exists in XML
         buttonHome.setOnClickListener {
             val intent = Intent(this, LandingPageActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Clears backstack
             startActivity(intent)
             finish()
         }
+
     }
 }
