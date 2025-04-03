@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 
-class Activity_profiles_page : Activity() {
+class ProfilePage : Activity() {
     private lateinit var textViewName: TextView
     private lateinit var textViewEmail: TextView
     private lateinit var textViewTitle: TextView
@@ -17,7 +17,7 @@ class Activity_profiles_page : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profiles_page)
+        setContentView(R.layout.profile_page)
 
         // Initialize text views
         textViewName = findViewById(R.id.edit_name)
@@ -42,7 +42,7 @@ class Activity_profiles_page : Activity() {
 
         // Handle Edit Profile Click
         editProfile.setOnClickListener {
-            val intent = Intent(this, ActivityProfilesPage2::class.java)
+            val intent = Intent(this, EditProfilePage::class.java)
             startActivityForResult(intent, 1001) // Start Edit Profile Activity
         }
     }

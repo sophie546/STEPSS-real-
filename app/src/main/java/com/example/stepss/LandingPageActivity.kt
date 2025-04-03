@@ -21,7 +21,7 @@ class LandingPageActivity : Activity() {
         burgerIcon = findViewById(R.id.burger_icon)
 
         profileButton.setOnClickListener {
-            val intent = Intent(this, Activity_profiles_page::class.java)
+            val intent = Intent(this, ProfilePage::class.java)
             startActivity(intent)
             Toast.makeText(this, "Profile (Sophia's Page)!", Toast.LENGTH_LONG).show()
         }
@@ -60,13 +60,13 @@ class LandingPageActivity : Activity() {
         popupMenu.setOnMenuItemClickListener { item: MenuItem ->
             when (item.itemId) {
                 R.id.nav_settings -> {
-                    val intent = Intent(this, activity_settings::class.java)
+                    val intent = Intent(this, SettingsActivity::class.java)
                     startActivity(intent)
                     Toast.makeText(this, "Settings (Sophia's Page)!", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.nav_about -> {
-                    val intent = Intent(this, developers_page::class.java)
+                    val intent = Intent(this, DevelopersActivity::class.java)
                     startActivity(intent)
                     Toast.makeText(this, "About Us (Sophia's Page)!", Toast.LENGTH_SHORT).show()
                     true

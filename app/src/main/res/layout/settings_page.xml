@@ -147,7 +147,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/option_change_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -155,9 +154,10 @@
             android:clickable="true">
 
             <TextView
+                android:id="@+id/option_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Change Password"
+                android:text="History"
                 android:textSize="18sp"
                 android:textColor="#FFFFFF" />
         </LinearLayout>

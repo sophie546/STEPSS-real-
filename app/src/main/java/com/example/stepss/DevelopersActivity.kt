@@ -7,10 +7,10 @@ import android.widget.Button
 import android.widget.ImageView
 
 
-class developers_page : Activity() {
+class DevelopersActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_developers_page)
+        setContentView(R.layout.developers_page)
 
         // Home Button
         val buttonHome: ImageView = findViewById(R.id.back_button) // Ensure this ID exists in XML
