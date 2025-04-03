@@ -23,7 +23,7 @@
             val history = findViewById<TextView>(R.id.option_history)
 
             history.setOnClickListener{
-                val intent = Intent(this,HistoryActivity::class.java)
+                val intent = Intent(this,CustomListViewActivity::class.java)
                 startActivity(intent)
             }
 
