@@ -20,10 +20,18 @@
 
             // Find "About the Developers" option
             val aboutDevs: LinearLayout = findViewById(R.id.option_about_devs)
+
             val history = findViewById<TextView>(R.id.option_history)
+
+            val privacy = findViewById<TextView>(R.id.option_privacy)
 
             history.setOnClickListener{
                 val intent = Intent(this,CustomListViewActivity::class.java)
+                startActivity(intent)
+            }
+
+            privacy.setOnClickListener{
+                val intent = Intent(this, RecyclerViewActivity :: class.java)
                 startActivity(intent)
             }
 
