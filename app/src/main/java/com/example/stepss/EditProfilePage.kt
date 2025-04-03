@@ -6,12 +6,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.LinearLayout
 
-class ActivityProfilesPage2 : Activity() {
+class EditProfilePage : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profiles_page2)
+        setContentView(R.layout.edit_profile_page)
 
         val editTextName = findViewById<EditText>(R.id.edit_name)
         val editTextEmail = findViewById<EditText>(R.id.edit_email)
@@ -47,7 +46,7 @@ class ActivityProfilesPage2 : Activity() {
     }
 
     private fun redirectToLogin() {
-        val intent = Intent(this, Activity_profiles_page::class.java)
+        val intent = Intent(this, ProfilePage::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Clears backstack
         startActivity(intent)
         finish()

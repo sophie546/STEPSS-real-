@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.widget.Button
 
 
-class developers_page : Activity() {
+class DevelopersActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_developers_page)
+        setContentView(R.layout.developers_page)
 
         // Home Button
         val buttonHome: Button = findViewById(R.id.btn_home) // Ensure this ID exists in XML

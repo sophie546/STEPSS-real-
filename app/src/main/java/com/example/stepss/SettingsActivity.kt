@@ -5,11 +5,12 @@
     import android.app.AlertDialog
     import android.content.Intent
     import android.widget.LinearLayout
+    import android.widget.TextView
 
-    class activity_settings : Activity() {
+    class SettingsActivity : Activity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_settings) // Ensure this matches your XML file name
+            setContentView(R.layout.settings_page) // Ensure this matches your XML file name
 
             // Find the Logout option
             val logoutOption: LinearLayout = findViewById(R.id.logout_button)
@@ -19,6 +20,12 @@
 
             // Find "About the Developers" option
             val aboutDevs: LinearLayout = findViewById(R.id.option_about_devs)
+            val history = findViewById<TextView>(R.id.option_history)
+
+            history.setOnClickListener{
+                val intent = Intent(this,HistoryActivity::class.java)
+                startActivity(intent)
+            }
 
             // Handle Logout Click
             logoutOption.setOnClickListener {
@@ -32,7 +39,7 @@
 
             // Handle About Developers Click
             aboutDevs.setOnClickListener {
-                val intent = Intent(this, developers_page::class.java)
+                val intent = Intent(this, DevelopersActivity::class.java)
                 startActivity(intent)
             }
         }
