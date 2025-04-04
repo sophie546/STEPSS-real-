@@ -116,10 +116,6 @@ class LandingPageActivity : Activity() {
                     Toast.makeText(this, "About Us (Sophia's Page)!", Toast.LENGTH_SHORT).show()
                     true
                 }
-                R.id.nav_logout -> {
-                    showConfirmLogoutDialog()
-                    true
-                }
                 else -> false
             }
         }
