@@ -11,47 +11,48 @@
         android:orientation="horizontal"
         android:padding="0dp"
         android:gravity="center_horizontal"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="30dp">
 
         <!-- Profile Button -->
+
+        <!-- Name and Age -->
         <ImageButton
             android:id="@+id/profile_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/profile_picture"
             android:background="@drawable/circle_shape"
-            android:scaleType="centerCrop"
+            android:clickable="true"
             android:clipToOutline="true"
             android:contentDescription="Profile button"
-            android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_picture" />
 
-        <!-- Name and Age -->
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingLeft="70dp"
-            android:paddingRight="70dp"
-            android:gravity="center_horizontal">
+            android:paddingRight="70dp">
 
             <TextView
                 android:id="@+id/Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="Zander Aligato"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:gravity="center"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/age_country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="20 yrs · Philippines"
-                android:textColor="@color/white"
-                android:gravity="center"/>
+                android:textColor="@color/white" />
         </LinearLayout>
 
         <!-- Burger Icon and Sliding Menu -->
@@ -59,17 +60,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
+            <!-- Sliding Navigation Menu -->
             <ImageButton
                 android:id="@+id/burger_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/burger_icon"
-                android:background="@android:color/transparent"
-                android:contentDescription="Burger Menu"
+                android:layout_marginTop="10dp"
                 android:clickable="true"
-                android:focusable="true" />
+                android:contentDescription="Burger Menu"
+                android:focusable="true"
+                android:background="@drawable/settings_icon" />
 
-            <!-- Sliding Navigation Menu -->
             <LinearLayout
                 android:id="@+id/navigation_menu"
                 android:orientation="vertical"
@@ -216,13 +217,13 @@
 
         <ImageButton
             android:id="@+id/button_home"
-            android:background="@drawable/home_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:contentDescription="Profile button"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_gravity="center"
+            android:background="@drawable/home_icon"
+            android:clickable="true"
+            android:contentDescription="Profile button"
+            android:focusable="true"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             />
@@ -272,6 +273,6 @@
             android:focusable="true"
             android:layout_gravity="center"
             android:paddingTop="5dp"
-            android:paddingBottom="5dp"/>
+            android:paddingBottom="5dp" />
     </LinearLayout>
 </LinearLayout>
