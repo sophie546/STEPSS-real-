@@ -155,46 +155,52 @@
         android:textSize="20sp"
         android:layout_marginLeft="20dp"
         android:textColor="@color/white" />
+
+    <!-- Nav Bar -->
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp"
+        android:layout_height="325dp"
         android:layout_margin="20dp"
         android:background="@drawable/rounded_bg"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="15dp">
         <!-- Hydration x 5x a Day -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
             android:layout_margin="20dp"
-            android:layout_gravity="center_vertical">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="150dp"
                 android:text="Hydration"
-                android:textStyle="bold"
-                android:textSize="20sp"
                 android:textColor="@color/white"
-                android:layout_marginRight="150dp"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5x a day"
-                android:textSize="15sp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:src="@drawable/water"/>
+            android:id="@+id/gifImageView"
+            android:layout_width="248dp"
+            android:layout_height="248dp"
+            android:layout_marginBottom="25dp"
+            android:layout_gravity="center"
+            android:src="@drawable/water" />
+
+
     </LinearLayout>
 
-    <!-- Nav Bar -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

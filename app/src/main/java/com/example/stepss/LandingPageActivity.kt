@@ -9,6 +9,9 @@ import android.view.View
 import android.content.Intent
 import android.widget.PopupMenu
 import androidx.appcompat.app.AlertDialog
+import com.bumptech.glide.Glide
+import android.widget.ImageView
+
 
 class LandingPageActivity : Activity() {
     private lateinit var burgerIcon: ImageButton
@@ -16,6 +19,14 @@ class LandingPageActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.landing_page)
+
+        val gifImageView = findViewById<ImageView>(R.id.gifImageView)
+
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.water)
+            .into(gifImageView)
+
 
         val profileButton: ImageButton = findViewById(R.id.profile_button)
         burgerIcon = findViewById(R.id.burger_icon)
@@ -96,4 +107,6 @@ class LandingPageActivity : Activity() {
             .setNegativeButton("No", null)
             .show()
     }
+
+
 }
