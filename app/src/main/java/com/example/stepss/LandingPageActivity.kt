@@ -21,21 +21,10 @@ class LandingPageActivity : Activity() {
         setContentView(R.layout.landing_page)
 
         val gifImageView = findViewById<ImageView>(R.id.gifImageView)
-
-        Glide.with(this)
-            .asGif()
-            .load(R.drawable.water)
-            .into(gifImageView)
-
+        Glide.with(this).asGif().load(R.drawable.water).into(gifImageView)
 
         val profileButton: ImageButton = findViewById(R.id.profile_button)
         burgerIcon = findViewById(R.id.burger_icon)
-
-        profileButton.setOnClickListener {
-            val intent = Intent(this, ProfilePage::class.java)
-            startActivity(intent)
-            Toast.makeText(this, "Profile (Sophia's Page)!", Toast.LENGTH_LONG).show()
-        }
 
         val homeButton: ImageButton = findViewById(R.id.button_home)
         val startButton: ImageButton = findViewById(R.id.button_start)
@@ -43,26 +32,42 @@ class LandingPageActivity : Activity() {
         val musicButton: ImageButton = findViewById(R.id.button_music)
         val progressButton: ImageButton = findViewById(R.id.button_progress)
 
-        homeButton.setOnClickListener{
-            Toast.makeText(this,"Already here :>", Toast.LENGTH_LONG).show()
+        // Add zoom effect
+        addZoomEffect(profileButton)
+        addZoomEffect(burgerIcon)
+        addZoomEffect(homeButton)
+        addZoomEffect(startButton)
+        addZoomEffect(recoveryButton)
+        addZoomEffect(musicButton)
+        addZoomEffect(progressButton)
+
+        profileButton.setOnClickListener {
+            val intent = Intent(this, ProfilePage::class.java)
+            startActivity(intent)
+            Toast.makeText(this, "Profile (Sophia's Page)!", Toast.LENGTH_LONG).show()
         }
-        startButton.setOnClickListener{
-            Toast.makeText(this,"Stay Tuned!", Toast.LENGTH_LONG).show()
+
+        homeButton.setOnClickListener {
+            Toast.makeText(this, "Already here :>", Toast.LENGTH_LONG).show()
         }
-        recoveryButton.setOnClickListener{
-            Toast.makeText(this,"Stay Tuned!", Toast.LENGTH_LONG).show()
+        startButton.setOnClickListener {
+            Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
         }
-        musicButton.setOnClickListener{
-            Toast.makeText(this,"Stay Tuned!", Toast.LENGTH_LONG).show()
+        recoveryButton.setOnClickListener {
+            Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
         }
-        progressButton.setOnClickListener{
-            Toast.makeText(this,"Stay Tuned!", Toast.LENGTH_LONG).show()
+        musicButton.setOnClickListener {
+            Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
+        }
+        progressButton.setOnClickListener {
+            Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
         }
 
         burgerIcon.setOnClickListener { view ->
             showPopupMenu(view)
         }
     }
+
 
     private fun showPopupMenu(view: View) {
         val popupMenu = PopupMenu(this, view)
@@ -107,6 +112,21 @@ class LandingPageActivity : Activity() {
             .setNegativeButton("No", null)
             .show()
     }
+
+    private fun addZoomEffect(button: ImageButton) {
+        button.setOnTouchListener { v, event ->
+            when (event.action) {
+                android.view.MotionEvent.ACTION_DOWN -> {
+                    v.animate().scaleX(1.2f).scaleY(1.2f).setDuration(150).start()
+                }
+                android.view.MotionEvent.ACTION_UP, android.view.MotionEvent.ACTION_CANCEL -> {
+                    v.animate().scaleX(1f).scaleY(1f).setDuration(150).start()
+                }
+            }
+            false
+        }
+    }
+
 
 
 }

@@ -1,0 +1,6 @@
+<!-- res/drawable/highlighted_icon_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#FFFFFF" /> <!-- Highlight color -->
+    <size android:width="40dp" android:height="40dp" />
+</shape>
