@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3e3e3e">
+    android:background="#121417">
     <!-- Top Bar Menu -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +32,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="70dp"
-            android:paddingRight="70dp">
+            android:paddingRight="70dp"
+            android:gravity="center_horizontal">
 
             <TextView
                 android:id="@+id/Name"
@@ -41,14 +42,16 @@
                 android:text="Zander Aligato"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/age_country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20 yrs · Philippines"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:gravity="center"/>
         </LinearLayout>
 
         <!-- Burger Icon and Sliding Menu -->
@@ -56,7 +59,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <!-- Burger Icon -->
             <ImageButton
                 android:id="@+id/burger_icon"
                 android:layout_width="30dp"
@@ -200,9 +202,11 @@
         android:padding="10dp"
         android:layout_margin="20dp"
         android:background="@drawable/rounded_bg"
-        android:layout_gravity="center"
+        android:backgroundTint="#2E2E2E"
+        android:layout_gravity= "center_horizontal"
         android:clipChildren="false"
-        android:clipToPadding="false">
+        android:clipToPadding="false"
+        android:baselineAligned="false">
 
         <ImageButton
             android:id="@+id/button_home"
@@ -211,7 +215,10 @@
             android:layout_height="30dp"
             android:contentDescription="Profile button"
             android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:layout_gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
 
         <ImageButton
             android:id="@+id/button_progress"
@@ -222,27 +229,30 @@
             android:contentDescription="Profile button"
             android:clickable="true"
             android:focusable="true"
+            android:layout_gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             />
 
         <ImageButton
             android:id="@+id/button_start"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/add_icon"
             android:scaleType="centerInside"
-            android:layout_gravity="center"
             android:contentDescription="Profile button"
             android:clickable="true"
             android:focusable="true"
-            />
+            android:layout_gravity="center" />
 
         <ImageButton
             android:id="@+id/button_recovery"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background = "@drawable/recovery_icon"
-            android:layout_marginLeft="25dp"/>
+            android:layout_marginLeft="25dp"
+            android:layout_gravity="center" />
 
         <ImageButton
             android:id="@+id/button_music"
@@ -253,6 +263,8 @@
             android:contentDescription="Profile button"
             android:clickable="true"
             android:focusable="true"
-            />
+            android:layout_gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
     </LinearLayout>
 </LinearLayout>

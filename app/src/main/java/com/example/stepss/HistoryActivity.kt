@@ -1,3 +1,4 @@
+//SIMPLE LIST ACTIVITY
 //package com.example.stepss
 //
 //import android.app.Activity

@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3e3e3e"
+    android:background="#121417"
     android:padding="0dp">
 
     <ImageView
@@ -52,9 +52,10 @@
             android:layout_marginEnd="20dp"
             android:padding="10dp"
             android:text="Register or Login"
+            android:textColor="@color/white"
             android:textSize="24sp"
             app:cornerRadius="8dp"
-            android:backgroundTint="#6d98bd" />
+            android:backgroundTint="#6D98BD" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -79,7 +80,8 @@
             app:cornerRadius="8dp"
             app:strokeWidth="2dp"
             app:strokeColor="#6d98bd"
-            app:backgroundTint="@android:color/transparent"
+            android:textColor="@color/white"
+            android:backgroundTint="#2E2E2E"
             app:rippleColor="@android:color/transparent" />
     </LinearLayout>
 </LinearLayout>
