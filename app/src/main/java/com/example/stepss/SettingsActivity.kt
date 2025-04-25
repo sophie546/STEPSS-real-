@@ -4,6 +4,7 @@
     import android.app.Activity
     import android.app.AlertDialog
     import android.content.Intent
+    import android.widget.Button
     import android.widget.LinearLayout
     import android.widget.TextView
 
@@ -13,7 +14,7 @@
             setContentView(R.layout.settings_page) // Ensure this matches your XML file name
 
             // Find the Logout option
-            val logoutOption: LinearLayout = findViewById(R.id.logout_button)
+            val logoutOption = findViewById<Button>(R.id.button_logout_button)
 
             // Find the Back Arrow
             val backArrow: LinearLayout = findViewById(R.id.back_arrow)
