@@ -39,7 +39,9 @@
         android:background="@drawable/edittext_border"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:singleLine="true"
+        android:maxLines="1"/>
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -56,37 +58,17 @@
         android:background="@drawable/edittext_border"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:maxLines="1"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:gravity="center_vertical">
 
-        <CheckBox
-            android:id="@+id/rememberMeCheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/white" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Remember Me"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            android:layout_marginLeft="8dp" />
-    </LinearLayout>
 
     <Button
         android:id="@+id/button_SignUpLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:padding="12dp"
