@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import android.widget.ImageView
 
+
 class LandingPageActivity : Activity() {
     private lateinit var burgerIcon: ImageButton
     private lateinit var homeButton: ImageButton
@@ -99,6 +100,7 @@ class LandingPageActivity : Activity() {
         selectedButton.isSelected = true
     }
 
+
     private fun showPopupMenu(view: View) {
         val popupMenu = PopupMenu(this, view)
         popupMenu.menuInflater.inflate(R.menu.burger_menu, popupMenu.menu)
@@ -156,4 +158,7 @@ class LandingPageActivity : Activity() {
             false
         }
     }
+
+
+
 }
