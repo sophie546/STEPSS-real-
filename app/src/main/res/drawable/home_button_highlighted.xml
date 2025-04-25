@@ -1,0 +1,12 @@
+<!-- res/drawable/home_button_highlighted.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Bottom layer: Highlight background -->
+    <item android:drawable="@drawable/highlighted_icon_background" />
+
+    <!-- Top layer: Home icon -->
+    <item
+        android:drawable="@drawable/home_icon"
+        android:width="24dp"
+        android:height="24dp"
+        android:gravity="center" />
+</layer-list>

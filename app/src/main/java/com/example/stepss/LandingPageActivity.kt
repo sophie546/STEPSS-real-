@@ -15,24 +15,32 @@ import android.widget.ImageView
 
 class LandingPageActivity : Activity() {
     private lateinit var burgerIcon: ImageButton
+    private lateinit var homeButton: ImageButton
+    private lateinit var progressButton: ImageButton
+    private lateinit var recoveryButton: ImageButton
+    private lateinit var musicButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.landing_page)
 
+        // Initialize views
         val gifImageView = findViewById<ImageView>(R.id.gifImageView)
         Glide.with(this).asGif().load(R.drawable.water).into(gifImageView)
 
         val profileButton: ImageButton = findViewById(R.id.profile_button)
         burgerIcon = findViewById(R.id.burger_icon)
 
-        val homeButton: ImageButton = findViewById(R.id.button_home)
+        homeButton = findViewById(R.id.button_home)
         val startButton: ImageButton = findViewById(R.id.button_start)
-        val recoveryButton: ImageButton = findViewById(R.id.button_recovery)
-        val musicButton: ImageButton = findViewById(R.id.button_music)
-        val progressButton: ImageButton = findViewById(R.id.button_progress)
+        recoveryButton = findViewById(R.id.button_recovery)
+        musicButton = findViewById(R.id.button_music)
+        progressButton = findViewById(R.id.button_progress)
 
-        // Add zoom effect
+        // Set initial state (home selected by default)
+        setSelectedButton(homeButton)
+
+        // Add zoom effect to all buttons
         addZoomEffect(profileButton)
         addZoomEffect(burgerIcon)
         addZoomEffect(homeButton)
@@ -41,6 +49,7 @@ class LandingPageActivity : Activity() {
         addZoomEffect(musicButton)
         addZoomEffect(progressButton)
 
+        // Set click listeners
         profileButton.setOnClickListener {
             val intent = Intent(this, ProfilePage::class.java)
             startActivity(intent)
@@ -48,24 +57,47 @@ class LandingPageActivity : Activity() {
         }
 
         homeButton.setOnClickListener {
+            setSelectedButton(homeButton)
             Toast.makeText(this, "Already here :>", Toast.LENGTH_LONG).show()
         }
-        startButton.setOnClickListener {
-            Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
-        }
-        recoveryButton.setOnClickListener {
-            Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
-        }
-        musicButton.setOnClickListener {
-            Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
-        }
+
         progressButton.setOnClickListener {
+            setSelectedButton(progressButton)
+            Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
+            // Replace with actual navigation when ready:
+            // val intent = Intent(this, ProgressActivity::class.java)
+            // startActivity(intent)
+        }
+
+        recoveryButton.setOnClickListener {
+            setSelectedButton(recoveryButton)
+            Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
+        }
+
+        musicButton.setOnClickListener {
+            setSelectedButton(musicButton)
+            Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
+        }
+
+        startButton.setOnClickListener {
+            // Center button typically doesn't get highlighted
             Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
         }
 
         burgerIcon.setOnClickListener { view ->
             showPopupMenu(view)
         }
+    }
+
+    private fun setSelectedButton(selectedButton: ImageButton) {
+        // Reset all navigation buttons
+        homeButton.isSelected = false
+        progressButton.isSelected = false
+        recoveryButton.isSelected = false
+        musicButton.isSelected = false
+
+        // Set the selected button
+        selectedButton.isSelected = true
     }
 
 
