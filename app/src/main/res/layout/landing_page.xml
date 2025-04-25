@@ -1,283 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121417">
-    <!-- Top Bar Menu -->
+    android:background="#0F1013"
+    android:padding="16dp">
+
+    <!-- Modern App Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="0dp"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="15dp">
+        android:gravity="center_vertical"
+        android:layout_marginBottom="24dp">
 
-        <!-- Profile Button -->
         <ImageButton
             android:id="@+id/profile_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:src="@drawable/profile_picture"
-            android:background="@drawable/circle_shape"
+            android:background="@drawable/circle_shape_modern"
             android:scaleType="centerCrop"
             android:clipToOutline="true"
-            android:contentDescription="Profile button"
-            android:clickable="true"
-            android:focusable="true" />
+            android:contentDescription="Profile"
+            android:elevation="4dp"/>
 
-        <!-- Name and Age -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingLeft="70dp"
-            android:paddingRight="70dp"
-            android:gravity="center_horizontal">
+            android:paddingStart="16dp">
 
             <TextView
                 android:id="@+id/Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Zander Aligato"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:gravity="center"/>
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/age_country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20 yrs · Philippines"
-                android:textColor="@color/white"
-                android:gravity="center"/>
+                android:textColor="#B0B0B0"
+                android:textSize="14sp"/>
         </LinearLayout>
 
-        <!-- Burger Icon and Sliding Menu -->
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageButton
-                android:id="@+id/burger_icon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/burger_icon"
-                android:background="@android:color/transparent"
-                android:contentDescription="Burger Menu"
-                android:clickable="true"
-                android:focusable="true" />
-
-            <!-- Sliding Navigation Menu -->
-            <LinearLayout
-                android:id="@+id/navigation_menu"
-                android:orientation="vertical"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:background="@android:color/white"
-                android:elevation="8dp"
-                android:padding="8dp"
-                android:visibility="gone"
-                android:layout_gravity="end"
-                android:translationX="200dp">
-
-                <Button
-                    android:id="@+id/btn_settings"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Settings" />
-
-                <Button
-                    android:id="@+id/btn_about_us"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="About Us" />
-
-                <Button
-                    android:id="@+id/btn_log_out"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Log Out" />
-            </LinearLayout>
-        </FrameLayout>
+        <ImageButton
+            android:id="@+id/burger_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/burger_icon"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Menu" />
     </LinearLayout>
 
-
-    <!-- Progress Bar -->
+    <!-- Progress Card - Modern Design -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="15dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/rounded_bg"
-        android:gravity="center_vertical">
+        android:background="@drawable/modern_card_bg"
+        android:padding="20dp"
+        android:layout_marginBottom="24dp"
+        android:gravity="center_vertical"
+        android:elevation="2dp">
 
-        <!-- Text Container -->
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Your Progress"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@color/white" />
+                android:layout_marginBottom="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="Progress isn’t always loud, but it’s always there. Stay steady and unstoppable! "
-                android:textColor="@color/white"
-                android:maxLines="3"
-                android:ellipsize="end"/>
+                android:text="Progress isn't always loud, but it's always there. Stay steady and unstoppable!"
+                android:textColor="#CCCCCC"
+                android:textSize="13sp"
+                android:maxLines="3"/>
         </LinearLayout>
 
-        <!-- Image -->
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/progressring_img"/>
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/progressring_img" />
     </LinearLayout>
 
-    <!-- Featured Tips-->
+    <!-- Featured Tips Header -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Featured Tips"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_marginLeft="20dp"
-        android:textColor="@color/white" />
+        android:layout_marginBottom="12dp"/>
 
-    <!-- Nav Bar -->
+    <!-- Hydration Card -->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="325dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/rounded_bg"
-        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="15dp">
-        <!-- Hydration x 5x a Day -->
+        android:background="@drawable/modern_card_bg"
+        android:padding="20dp"
+        android:layout_marginBottom="24dp"
+        android:elevation="2dp">
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="20dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="150dp"
                 android:text="Hydration"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5x a day"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textColor="#B0B0B0"
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <ImageView
             android:id="@+id/gifImageView"
-            android:layout_width="248dp"
-            android:layout_height="248dp"
-            android:layout_marginBottom="25dp"
-            android:layout_gravity="center"
-            android:src="@drawable/water" />
-
-
-    </LinearLayout>
-
-    <!-- Bottom Navigation Bar -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/rounded_bg"
-        android:backgroundTint="#2E2E2E"
-        android:layout_gravity= "center_horizontal"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:baselineAligned="false">
-
-        <!-- Home Button -->
-        <ImageButton
-            android:id="@+id/button_home"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/home_button_selector"
-            android:contentDescription="Home button"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_gravity="center"
-            android:padding="5dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"/>
-
-        <!-- Progress Button -->
-        <ImageButton
-            android:id="@+id/button_progress"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/progress_button_selector"
-            android:layout_marginLeft="25dp"
-            android:contentDescription="Progress button"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_gravity="center"
-            android:padding="5dp"/>
-
-        <ImageButton
-            android:id="@+id/button_start"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/add_icon"
-            android:scaleType="centerInside"
-            android:contentDescription="Start button"
-            android:clickable="true"
-            android:focusable="true"
+            android:layout_width="200dp"
+            android:layout_height="250dp"
+            android:src="@drawable/water"
+            android:scaleType="centerCrop"
+            android:background="#1E1F23"
             android:layout_gravity="center"/>
-
-        <!-- Recovery Button -->
-        <ImageButton
-            android:id="@+id/button_recovery"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/recovery_button_selector"
-            android:layout_marginLeft="25dp"
-            android:contentDescription="Recovery button"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_gravity="center"
-            android:padding="5dp"/>
-
-        <!-- Music Button -->
-        <ImageButton
-            android:id="@+id/button_music"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/music_button_selector"
-            android:layout_marginLeft="25dp"
-            android:contentDescription="Music button"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_gravity="center"
-            android:padding="5dp"/>
     </LinearLayout>
+
+    <!-- Modern Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/modern_nav_bg"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="8dp"
+        app:itemIconTint="@drawable/nav_icon_colors"
+        app:itemTextColor="@drawable/nav_text_colors"
+        app:menu="@menu/burger_menu"/>
 </LinearLayout>

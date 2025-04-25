@@ -53,17 +53,14 @@ class LandingPageActivity : Activity() {
         profileButton.setOnClickListener {
             val intent = Intent(this, ProfilePage::class.java)
             startActivity(intent)
-            Toast.makeText(this, "Profile (Sophia's Page)!", Toast.LENGTH_LONG).show()
         }
 
         homeButton.setOnClickListener {
             setSelectedButton(homeButton)
-            Toast.makeText(this, "Already here :>", Toast.LENGTH_LONG).show()
         }
 
         progressButton.setOnClickListener {
             setSelectedButton(progressButton)
-            Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
             // Replace with actual navigation when ready:
             // val intent = Intent(this, ProgressActivity::class.java)
             // startActivity(intent)
@@ -71,12 +68,12 @@ class LandingPageActivity : Activity() {
 
         recoveryButton.setOnClickListener {
             setSelectedButton(recoveryButton)
-            Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
+
         }
 
         musicButton.setOnClickListener {
             setSelectedButton(musicButton)
-            Toast.makeText(this, "Stay Tuned!", Toast.LENGTH_LONG).show()
+
         }
 
         startButton.setOnClickListener {
