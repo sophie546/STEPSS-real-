@@ -201,6 +201,7 @@
 
     </LinearLayout>
 
+    <!-- Bottom Navigation Bar -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -209,69 +210,73 @@
         android:layout_margin="20dp"
         android:background="@drawable/rounded_bg"
         android:backgroundTint="#2E2E2E"
-        android:layout_gravity= "center_horizontal"
+        android:layout_gravity="center_horizontal"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:baselineAligned="false">
 
+        <!-- Home Button -->
         <ImageButton
             android:id="@+id/button_home"
-            android:background="@drawable/home_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:contentDescription="Profile button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/home_button_selector"
+            android:contentDescription="Home button"
             android:clickable="true"
             android:focusable="true"
             android:layout_gravity="center"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            />
+            android:padding="5dp"/>
 
+        <!-- Progress Button -->
         <ImageButton
             android:id="@+id/button_progress"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background = "@drawable/progress_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/progress_button_selector"
             android:layout_marginLeft="25dp"
-            android:contentDescription="Profile button"
+            android:contentDescription="Progress button"
             android:clickable="true"
             android:focusable="true"
             android:layout_gravity="center"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            />
+            android:padding="5dp"/>
 
+        <!-- Start Button (Center) -->
         <ImageButton
             android:id="@+id/button_start"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_marginLeft="20dp"
             android:background="@drawable/add_icon"
             android:scaleType="centerInside"
-            android:contentDescription="Profile button"
+            android:contentDescription="Start button"
             android:clickable="true"
             android:focusable="true"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"/>
 
+        <!-- Recovery Button -->
         <ImageButton
             android:id="@+id/button_recovery"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background = "@drawable/recovery_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/recovery_button_selector"
             android:layout_marginLeft="25dp"
-            android:layout_gravity="center" />
-
-        <ImageButton
-            android:id="@+id/button_music"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background = "@drawable/spotify_icon"
-            android:layout_marginLeft="25dp"
-            android:contentDescription="Profile button"
+            android:contentDescription="Recovery button"
             android:clickable="true"
             android:focusable="true"
             android:layout_gravity="center"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"/>
+            android:padding="5dp"/>
+
+        <!-- Music Button -->
+        <ImageButton
+            android:id="@+id/button_music"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/music_button_selector"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="Music button"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_gravity="center"
+            android:padding="5dp"/>
     </LinearLayout>
 </LinearLayout>

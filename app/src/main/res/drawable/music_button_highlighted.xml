@@ -1,8 +1,8 @@
-<!-- res/drawable/start_button_normal.xml -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/add_icon"
+    <item android:drawable="@drawable/highlighted_icon_background" />
+    <item
+        android:drawable="@drawable/spotify_icon"
         android:width="24dp"
         android:height="24dp"
         android:gravity="center" />
 </layer-list>
-
