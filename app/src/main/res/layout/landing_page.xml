@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background">
@@ -175,13 +174,13 @@
     <!-- Bottom Navigation Bar - Fixed to Bottom -->
     <LinearLayout
         android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:background="@drawable/modern_nav_bg"
         android:gravity="center"
-        android:layout_marginHorizontal="22dp"
+        android:layout_marginHorizontal="70dp"
         android:layout_marginBottom="8dp"
         android:elevation="12dp"
         android:paddingHorizontal="12dp"
@@ -199,16 +198,6 @@
             android:layout_marginHorizontal="8dp"
             android:padding="6dp"/>
 
-        <!-- Progress Button -->
-        <ImageButton
-            android:id="@+id/button_progress"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:background="@drawable/progress_button_selector"
-            android:contentDescription="Progress"
-            android:scaleType="centerInside"
-            android:layout_marginHorizontal="8dp"
-            android:padding="6dp"/>
 
         <!-- Center Button -->
         <ImageButton
@@ -223,26 +212,18 @@
             android:layout_marginHorizontal="8dp"
             android:padding="8dp"/>
 
-        <!-- Recovery Button -->
+        <!-- Progress Button -->
         <ImageButton
-            android:id="@+id/button_recovery"
+            android:id="@+id/button_progress"
             android:layout_width="52dp"
             android:layout_height="52dp"
-            android:background="@drawable/recovery_button_selector"
-            android:contentDescription="Recovery"
+            android:background="@drawable/progress_button_selector"
+            android:contentDescription="Progress"
             android:scaleType="centerInside"
             android:layout_marginHorizontal="8dp"
             android:padding="6dp"/>
 
-        <!-- Music Button -->
-        <ImageButton
-            android:id="@+id/button_music"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:background="@drawable/music_button_selector"
-            android:contentDescription="Music"
-            android:scaleType="centerInside"
-            android:layout_marginHorizontal="8dp"
-            android:padding="6dp"/>
+
+
     </LinearLayout>
 </RelativeLayout>

@@ -33,7 +33,7 @@ class ProfilePage : Activity() {
         }
 
         val logoutButton: Button = findViewById(R.id.logout_button)
-        val editProfile: LinearLayout = findViewById(R.id.edit_profile)
+        val editProfile: ImageView = findViewById(R.id.edit_profile)
 
         // Handle Logout Click
         logoutButton.setOnClickListener {

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".WalkingTrackerActivity">
+
+    <!-- Modern App Bar (unchanged) -->
+    <LinearLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:src="@drawable/left_arrow_white"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp" />
+
+        <TextView
+            android:id="@+id/tvWalkingStepsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Walking Tracker"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:paddingStart="16dp"/>
+
+    </LinearLayout>
+
+    <!-- Scrollable Content Area -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appBar"
+        android:padding="16dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Progress Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/modern_card_bg"
+                android:padding="24dp"
+                android:layout_marginBottom="24dp"
+                android:elevation="4dp">
+
+                <!-- Walking GIF (Centered) -->
+                <ImageView
+                    android:id="@+id/imgWalkingGif"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:src="@drawable/walking_addpage"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Step Counter -->
+                <TextView
+                    android:id="@+id/tvWalkingStepCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="60sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="STEPS"
+                    android:textSize="16sp"
+                    android:textColor="#B0B0B0"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-8dp"/>
+
+                <!-- Distance Tracking -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvDistance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:textSize="28sp"
+                        android:textColor="#76a1ef"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" km"
+                        android:textSize="20sp"
+                        android:textColor="#B0B0B0"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <!-- Status -->
+                <TextView
+                    android:id="@+id/tvWalkingSensorStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ready"
+                    android:textColor="#76a1ef"
+                    android:textSize="14sp"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <!-- Button Group (unchanged) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/modern_card_bg"
+                android:padding="26dp"
+                android:elevation="4dp">
+
+                <!-- First Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginBottom="8dp">
+
+                    <!-- Start Button -->
+                    <Button
+                        android:id="@+id/btnStart"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/rounded_button_blue"
+                        android:text="Start"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"/>
+
+                    <!-- Stop Button -->
+                    <Button
+                        android:id="@+id/btnStop"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/rounded_button_orange"
+                        android:text="Stop"
+                        android:enabled="false"
+                        android:textColor="#FFFFFF"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <!-- Second Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!-- Show Track Button -->
+                    <Button
+                        android:id="@+id/btnShowTrack"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/rounded_button_green"
+                        android:text="Show Track"
+                        android:enabled="false"
+                        android:textColor="#FFFFFF"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"/>
+
+                    <!-- Reset Button -->
+                    <Button
+                        android:id="@+id/btnReset"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/rounded_button_orange"
+                        android:text="Reset"
+                        android:enabled="false"
+                        android:textColor="#FFFFFF"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
