@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background">
+    android:background="@drawable/gradient_background"
+    android:paddingBottom="80dp">
 
     <!-- Scrollable Content Area -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,12 +26,14 @@
                 android:layout_marginBottom="24dp">
 
                 <ImageButton
-                    android:id="@+id/back_button"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/left_arrow_white"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Back"
+                    android:id="@+id/profile_button"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:src="@drawable/profile_picture"
+                    android:background="@drawable/circle_shape_modern"
+                    android:scaleType="centerCrop"
+                    android:clipToOutline="true"
+                    android:contentDescription="Profile"
                     android:elevation="4dp"/>
 
                 <LinearLayout
@@ -42,16 +44,32 @@
                     android:paddingStart="16dp">
 
                     <TextView
+                        android:id="@+id/Name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Meet the Developers"
+                        android:text="Your Progress"
                         android:textColor="#FFFFFF"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/age_country"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Track your walking sessions"
+                        android:textColor="#B0B0B0"
+                        android:textSize="14sp"/>
                 </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/burger_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/burger_icon"
+                    android:background="@drawable/gradient_background" />
             </LinearLayout>
 
-            <!-- Team Description Card -->
+            <!-- Current Progress Card -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,146 +80,82 @@
                 android:elevation="2dp">
 
                 <TextView
+                    android:id="@+id/tvCurrentTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Our Team"
+                    android:text="Current Session"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="8dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="A passionate team dedicated to crafting seamless, innovative, and user-friendly experiences. Get to know the minds behind the magic!"
-                    android:textColor="#CCCCCC"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <!-- Developer Card 1 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/modern_card_bg"
-                android:padding="20dp"
-                android:layout_marginBottom="16dp"
-                android:elevation="2dp">
+                    android:layout_marginBottom="16dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:layout_marginBottom="8dp">
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/aloria"
-                        android:scaleType="centerCrop"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/circle_border"
-                        android:contentDescription="Aloria's Profile Picture"
-                        android:clipToOutline="true"/>
+                        android:layout_width="23dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/shoes"
+                        android:layout_marginEnd="8dp"/>
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/tvStepCountProgress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Sophia Bianca Aloria"
-                            android:textStyle="bold"
-                            android:textSize="18sp"
-                            android:textColor="#FFFFFF"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Android Developer | UI/UX Designer"
-                            android:textSize="14sp"
-                            android:textColor="#B0B0B0"/>
-                    </LinearLayout>
+                        android:text="Steps: 0"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"/>
                 </LinearLayout>
-            </LinearLayout>
-
-            <!-- Developer Card 2 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/modern_card_bg"
-                android:padding="20dp"
-                android:layout_marginBottom="16dp"
-                android:elevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/circle_border"
-                        android:clipToOutline="true"
-                        android:contentDescription="Teammate's Profile Picture"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/aligato" />
+                        android:layout_width="21dp"
+                        android:layout_height="21dp"
+                        android:src="@drawable/distance"
+                        android:layout_marginEnd="8dp"/>
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/tvDistanceProgress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Zander N. Aligato"
-                            android:textStyle="bold"
-                            android:textSize="18sp"
-                            android:textColor="#FFFFFF"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Android Developer | UI/UX Designer"
-                            android:textSize="14sp"
-                            android:textColor="#B0B0B0"/>
-                    </LinearLayout>
+                        android:text="Distance: 0 km"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"/>
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Team Vision Card -->
+            <!-- History Section Card -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/modern_card_bg"
                 android:padding="20dp"
-                android:layout_marginBottom="24dp"
                 android:elevation="2dp">
 
                 <TextView
+                    android:id="@+id/tvHistoryTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Our Vision"
+                    android:text="Previous Sessions"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_marginBottom="16dp"/>
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/historyContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="🚀 Building seamless and innovative apps!"
-                    android:textColor="#CCCCCC"
-                    android:textSize="14sp"
-                    android:textStyle="italic"/>
+                    android:orientation="vertical"
+                    android:showDividers="middle"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -232,7 +186,6 @@
             android:scaleType="centerInside"
             android:layout_marginHorizontal="8dp"
             android:padding="6dp"/>
-
 
         <!-- Center Button -->
         <ImageButton

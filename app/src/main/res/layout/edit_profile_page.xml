@@ -1,197 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white"
-    android:padding="20dp">
+    android:background="@drawable/gradient_background">
 
-    <!-- Top Bar -->
-    <RelativeLayout
+    <!-- Scrollable Content Area -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="10dp"
-        android:padding="12dp"
-        android:layout_marginBottom="10dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/back_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/leftarrow"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="10dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit Profile"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
-
-    <!-- Profile Picture Section -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="10dp">
-
-        <ImageView
-            android:id="@+id/profile_picture"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            android:background="@drawable/circle_border"
-            android:elevation="5dp"/>
-
-        <ImageView
-            android:id="@+id/edit_profile_picture"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/editpfp"
-            android:elevation="3dp"
-            android:layout_gravity="end|bottom"
-            android:padding="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"/>
-    </FrameLayout>
-
-    <!-- Editable Fields -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/rounded_bg"
-        android:elevation="10dp"
-        android:padding="15dp">
-
-        <!-- Name Field -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@drawable/input_field_background"
-            android:padding="10dp"
-            android:elevation="3dp">
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/names"
-                android:layout_marginEnd="10dp"/>
-
-            <EditText
-                android:id="@+id/edit_name"
+            <!-- Modern App Bar with Back Button -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter your name"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:background="@null"
-                android:padding="10dp"/>
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="24dp">
 
-        <!-- Email Field -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@drawable/input_field_background"
-            android:padding="10dp"
-            android:elevation="3dp">
+                <ImageButton
+                    android:id="@+id/back_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/circle_shape_modern"
+                    android:src="@drawable/left_arrow_white"
+                    android:backgroundTint="#6200ED"
+                    android:padding="8dp"/>
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/email"
-                android:layout_marginEnd="10dp"/>
+                <TextView
+                    android:layout_marginRight="35dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Edit Profile"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"/>
 
-            <EditText
-                android:id="@+id/edit_email"
+            </LinearLayout>
+
+            <!-- Profile Card -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter your email"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:background="@null"
-                android:padding="10dp"/>
+                android:orientation="vertical"
+                android:background="@drawable/modern_card_bg"
+                android:padding="24dp"
+                android:layout_marginBottom="24dp"
+                android:gravity="center_horizontal"
+                android:elevation="4dp">
+
+                <!-- Profile Picture -->
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+
+                    <ImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/circle_border_white"/>
+
+                    <ImageButton
+                        android:id="@+id/profile_image_view"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/editpfp"
+                        android:background="@drawable/circle_shape_modern"
+                        android:backgroundTint="#2DAA9E"
+                        android:layout_gravity="bottom|end"
+                        android:contentDescription="Edit profile"
+                        android:elevation="4dp"/>
+
+                </FrameLayout>
+
+                <!-- Profile Info Fields -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:showDividers="middle">
+
+                    <!-- Name Field -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingVertical="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NAME"
+                            android:textSize="12sp"
+                            android:textColor="#B0B0B0"
+                            android:layout_marginBottom="4dp"/>
+
+                        <EditText
+                            android:id="@+id/edit_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter your name"
+                            android:textSize="16sp"
+                            android:textColor="#FFFFFF"
+                            android:background="@null"
+                            android:paddingVertical="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Email Field -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingVertical="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="EMAIL"
+                            android:textSize="12sp"
+                            android:textColor="#B0B0B0"
+                            android:layout_marginBottom="4dp"/>
+
+                        <EditText
+                            android:id="@+id/edit_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter your email"
+                            android:textSize="16sp"
+                            android:textColor="#FFFFFF"
+                            android:background="@null"
+                            android:paddingVertical="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Title Field -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingVertical="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TITLE"
+                            android:textSize="12sp"
+                            android:textColor="#B0B0B0"
+                            android:layout_marginBottom="4dp"/>
+
+                        <EditText
+                            android:id="@+id/edit_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter your title"
+                            android:textSize="16sp"
+                            android:textColor="#FFFFFF"
+                            android:background="@null"
+                            android:paddingVertical="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Location Field -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingVertical="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="LOCATION"
+                            android:textSize="12sp"
+                            android:textColor="#B0B0B0"
+                            android:layout_marginBottom="4dp"/>
+
+                        <EditText
+                            android:id="@+id/edit_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter your location"
+                            android:textSize="16sp"
+                            android:textColor="#FFFFFF"
+                            android:background="@null"
+                            android:paddingVertical="8dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Save Button -->
+                <Button
+                    android:id="@+id/save_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="SAVE CHANGES"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:background="@drawable/rounded_button_blue"
+                    android:textColor="#FFFFFF"
+                    android:paddingVertical="12dp"/>
+            </LinearLayout>
         </LinearLayout>
-
-        <!-- Title Field -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@drawable/input_field_background"
-            android:padding="10dp"
-            android:elevation="3dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/title"
-                android:layout_marginEnd="10dp"/>
-
-            <EditText
-                android:id="@+id/edit_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter your title"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:background="@null"
-                android:padding="10dp"/>
-        </LinearLayout>
-
-        <!-- Location Field -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="@drawable/input_field_background"
-            android:padding="10dp"
-            android:elevation="3dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/location"
-                android:layout_marginEnd="10dp"/>
-
-            <EditText
-                android:id="@+id/edit_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter your location"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:background="@null"
-                android:padding="10dp"/>
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- Save Button -->
-    <Button
-        android:id="@+id/save_button"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="#2DAA9E"
-        android:elevation="10dp"
-        android:radius="30dp"
-        android:text="Save"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-</LinearLayout>
+    </ScrollView>
+</RelativeLayout>

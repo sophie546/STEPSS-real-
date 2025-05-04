@@ -2,6 +2,7 @@ package com.example.stepss
 
 import android.Manifest
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -30,6 +31,7 @@ class WalkingTrackerActivity : Activity(), SensorEventListener {
     private lateinit var tvStepCount: TextView
     private lateinit var tvDistance: TextView
     private lateinit var tvSensorStatus: TextView
+    private lateinit var btnBack: ImageView
     private lateinit var btnStart: Button
     private lateinit var btnStop: Button
     private lateinit var btnShowTrack: Button
@@ -47,96 +49,61 @@ class WalkingTrackerActivity : Activity(), SensorEventListener {
         setContentView(R.layout.activity_walking_tracker)
 
         // Initialize views
+        initializeViews()
+        setupGif()
+        setupSensorManager()
+        setupButtonListeners()
+        checkPermissions()
+    }
+
+    private fun initializeViews() {
         tvStepCount = findViewById(R.id.tvWalkingStepCount)
         tvSensorStatus = findViewById(R.id.tvWalkingSensorStatus)
+        tvDistance = findViewById(R.id.tvDistance)
         btnStart = findViewById(R.id.btnStart)
         btnStop = findViewById(R.id.btnStop)
         btnShowTrack = findViewById(R.id.btnShowTrack)
         btnReset = findViewById(R.id.btnReset)
         imgWalkingGif = findViewById(R.id.imgWalkingGif)
+        btnBack = findViewById(R.id.btnBack)
 
-        // Load GIF using Glide
+        // Disable buttons initially
+        btnStop.isEnabled = false
+        btnShowTrack.isEnabled = false
+        btnReset.isEnabled = false
+    }
+
+    private fun setupGif() {
         Glide.with(this)
             .asGif()
             .load(R.drawable.walking_addpage)
             .into(imgWalkingGif)
+    }
 
-        // Initialize sensor manager
+    private fun setupSensorManager() {
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+    }
 
-        // Set button states
-        btnStop.isEnabled = false
-        btnShowTrack.isEnabled = false
-        btnReset.isEnabled = false
-
-        // Set click listeners
+    private fun setupButtonListeners() {
         btnStart.setOnClickListener { startCounting() }
         btnStop.setOnClickListener { stopCounting() }
-        btnShowTrack.setOnClickListener { toggleTrackVisibility() }
+        btnShowTrack.setOnClickListener {
+            if (isCounting) showProgressActivity()
+            else toggleTrackVisibility()
+        }
         btnReset.setOnClickListener { resetStepCount() }
-
-        checkPermissions()
-    }
-
-    private fun startCounting() {
-        if (!isCounting && isSensorPresent) {
-            isCounting = true
-            btnStart.isEnabled = false
-            btnStop.isEnabled = true
-            btnShowTrack.isEnabled = true
-            btnReset.isEnabled = false
-            sensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_NORMAL)
-            tvSensorStatus.text = "Status: Counting steps..."
-            Toast.makeText(this, "Step counting started", Toast.LENGTH_SHORT).show()
+        btnBack.setOnClickListener {
+            val intent = Intent(this, LandingPageActivity::class.java)
+            startActivity(intent)
+            finish()
         }
-    }
-
-    private fun stopCounting() {
-        if (isCounting) {
-            isCounting = false
-            btnStart.isEnabled = true
-            btnStop.isEnabled = false
-            btnShowTrack.isEnabled = false
-            btnReset.isEnabled = true
-            sensorManager.unregisterListener(this)
-            tvSensorStatus.text = "Status: Ready"
-            Toast.makeText(this, "Step counting stopped", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun toggleTrackVisibility() {
-        isTrackingVisible = !isTrackingVisible
-        if (isTrackingVisible) {
-            tvStepCount.visibility = TextView.VISIBLE
-            btnShowTrack.text = "Hide Track"
-            Toast.makeText(this, "Showing progress", Toast.LENGTH_SHORT).show()
-        } else {
-            tvStepCount.visibility = TextView.INVISIBLE
-            btnShowTrack.text = "Show Track"
-            Toast.makeText(this, "Hiding progress", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun resetStepCount() {
-        if (isCounting) {
-            Toast.makeText(this, "Stop counting first to reset", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        initialSteps = currentSteps
-        updateStepCountDisplay()
-        btnReset.isEnabled = false
-        isTrackingVisible = false
-        tvStepCount.visibility = TextView.INVISIBLE
-        btnShowTrack.text = "Show Track"
-        btnShowTrack.isEnabled = false
-        Toast.makeText(this, "Counter reset to zero", Toast.LENGTH_SHORT).show()
     }
 
     private fun checkPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION)
-                != PackageManager.PERMISSION_GRANTED) {
+                != PackageManager.PERMISSION_GRANTED
+            ) {
                 ActivityCompat.requestPermissions(
                     this,
                     arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),
@@ -164,6 +131,67 @@ class WalkingTrackerActivity : Activity(), SensorEventListener {
         }
     }
 
+    private fun startCounting() {
+        if (!isCounting && isSensorPresent) {
+            if (stepSensor == null) {
+                Toast.makeText(this, "Step sensor unavailable", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            isCounting = true
+            btnStart.isEnabled = false
+            btnStop.isEnabled = true
+            btnShowTrack.isEnabled = true
+            btnReset.isEnabled = false
+            sensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_NORMAL)
+            tvSensorStatus.text = "Status: Counting steps..."
+            Toast.makeText(this, "Step counting started", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun stopCounting() {
+        if (isCounting) {
+            isCounting = false
+            btnStart.isEnabled = true
+            btnStop.isEnabled = false
+            btnShowTrack.isEnabled = true
+            btnReset.isEnabled = true
+            sensorManager.unregisterListener(this)
+            tvSensorStatus.text = "Status: Ready"
+            Toast.makeText(this, "Step counting stopped", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun toggleTrackVisibility() {
+        isTrackingVisible = !isTrackingVisible
+        if (isTrackingVisible) {
+            tvStepCount.visibility = TextView.VISIBLE
+            btnShowTrack.text = "Hide Track"
+            Toast.makeText(this, "Showing progress", Toast.LENGTH_SHORT).show()
+        } else {
+            tvStepCount.visibility = TextView.INVISIBLE
+            btnShowTrack.text = "Show Track"
+            Toast.makeText(this, "Hiding progress", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun resetStepCount() {
+        if (isCounting) {
+            Toast.makeText(this, "Stop counting first to reset", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        initialSteps = currentSteps
+        currentSteps = 0
+        updateStepCountDisplay()
+        btnReset.isEnabled = false
+        isTrackingVisible = false
+        tvStepCount.visibility = TextView.INVISIBLE
+        btnShowTrack.text = "Show Track"
+        btnShowTrack.isEnabled = false
+        Toast.makeText(this, "Counter reset to zero", Toast.LENGTH_SHORT).show()
+    }
+
     private fun updateStepCountDisplay() {
         val stepsSinceReset = currentSteps - initialSteps
         tvStepCount.text = stepsSinceReset.toString()
@@ -172,6 +200,18 @@ class WalkingTrackerActivity : Activity(), SensorEventListener {
         val distanceKm = (stepsSinceReset * AVERAGE_STEP_LENGTH_M) / METERS_TO_KM
         val df = DecimalFormat("#.##")
         tvDistance.text = "${df.format(distanceKm)} km"
+    }
+
+    private fun showProgressActivity() {
+        val stepsSinceReset = currentSteps - initialSteps
+        val distanceKm = (stepsSinceReset * AVERAGE_STEP_LENGTH_M) / METERS_TO_KM
+        val df = DecimalFormat("#.##")
+
+        val intent = Intent(this, ActivityProgress::class.java).apply {
+            putExtra("STEP_COUNT", stepsSinceReset.toString())
+            putExtra("DISTANCE", df.format(distanceKm))
+        }
+        startActivity(intent)
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
@@ -188,6 +228,20 @@ class WalkingTrackerActivity : Activity(), SensorEventListener {
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         // Optional accuracy handling
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (isCounting) {
+            sensorManager.unregisterListener(this)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isCounting && isSensorPresent) {
+            sensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_NORMAL)
+        }
     }
 
     override fun onRequestPermissionsResult(
