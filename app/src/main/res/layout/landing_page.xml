@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background">
 
-    <!-- Scrollable Content Area -->
+    <!-- Scrollable Content -->
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_navigation"
+        android:id="@+id/scroll_area"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:padding="16dp"
-        android:fillViewport="true">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-           >
+            android:orientation="vertical">
 
-            <!-- Modern App Bar -->
+            <!-- App Bar -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,7 +42,7 @@
                     android:scaleType="centerCrop"
                     android:clipToOutline="true"
                     android:contentDescription="Profile"
-                    android:elevation="4dp"/>
+                    android:elevation="4dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -59,135 +66,206 @@
                         android:layout_height="wrap_content"
                         android:text="20 yrs · Philippines"
                         android:textColor="#B0B0B0"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <ImageButton
-                    android:id="@+id/burger_icon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/burger_icon"
-                    android:background="@drawable/gradient_background" />
+                    android:id="@+id/icon_settings"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/icon_settings" />
             </LinearLayout>
 
-            <!-- Progress Card - Modern Design -->
+            <!-- Progress Card -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daily Progress"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"/>
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@drawable/modern_card_bg"
+                android:background="@drawable/modern_card_bg3"
                 android:padding="20dp"
+                android:gravity="center"
                 android:layout_marginBottom="24dp"
-                android:gravity="center_vertical"
                 android:elevation="2dp">
 
+                <!-- LEFT SIDE: Distance, Steps, Motivation -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <!-- Distance and Steps (horizontal) -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Your Progress"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="8dp"/>
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp">
 
+                        <!-- Distance Box -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center_horizontal">
+
+                            <TextView
+                                android:id="@+id/lbl_distance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Distance"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_distance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0.60km"
+                                android:textColor="@color/white"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <!-- Steps Box -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center_horizontal">
+
+                            <TextView
+                                android:id="@+id/lbl_steps"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Steps"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_steps"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="204"
+                                android:textColor="@color/white"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Motivational Text -->
                     <TextView
-                        android:layout_width="227dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="3"
-                        android:text="Progress isn't always loud, but it's always there. Stay steady and unstoppable!"
-                        android:textColor="#CCCCCC"
-                        android:textSize="12sp" />
+                        android:layout_marginTop="10dp"
+                        android:text="Stay active by hitting your 3,000-step daily goal!"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:maxLines="2" />
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/progressring_img" />
+                <!-- RIGHT SIDE: Progress Ring -->
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="90dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/progressring_img"
+                        android:scaleType="fitCenter" />
             </LinearLayout>
+
 
             <!-- Featured Tips Header -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Featured Tips"
+                android:text="Achievements"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp"/>
-
-            <!-- Hydration Card -->
+                android:layout_marginBottom="8dp" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 android:orientation="vertical"
-                android:background="@drawable/modern_card_bg"
-                android:padding="20dp"
-                android:layout_marginBottom="24dp"
-                android:elevation="2dp">
+                android:background="@drawable/modern_card_bg">
 
-                <LinearLayout
+                <!-- ListView to display the list of items -->
+                <ListView
+                    android:id="@+id/list_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="16dp">
+                    android:layout_height="match_parent"
+                    android:divider="@android:color/darker_gray"
+                    android:dividerHeight="1dp"
+                    android:padding="8dp"
+                    android:cacheColorHint="@android:color/transparent"/>
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hydration"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_weight="1"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="5x a day"
-                        android:textColor="#B0B0B0"
-                        android:textSize="14sp"/>
-                </LinearLayout>
+            <!-- Today's Motivation -->
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/gifImageView"
-                    android:layout_width="200dp"
-                    android:layout_height="250dp"
-                    android:src="@drawable/water"
-                    android:scaleType="centerCrop"
-                    android:background="#1E1F23"
-                    android:layout_gravity="center"/>
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/icon_lightbulb"
+                    android:layout_marginRight="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Today's Motivation"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
             </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textStyle="italic"
+                android:text="“Every step you take is progress, no matter how small”"
+                android:gravity="center"
+                android:maxLines="3"
+                android:textColor="@color/white"/>
+
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation Bar - Fixed to Bottom -->
+    <!-- Fixed Bottom Navigation -->
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="280dp"
         android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:background="@drawable/modern_nav_bg"
         android:gravity="center"
         android:layout_marginHorizontal="70dp"
         android:layout_marginBottom="8dp"
+        android:translationY="-20dp"
         android:elevation="12dp"
         android:paddingHorizontal="12dp"
         android:clipToPadding="true"
-        android:clipChildren="true">
+        android:clipChildren="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Home Button -->
         <ImageButton
             android:id="@+id/button_home"
             android:layout_width="52dp"
@@ -196,10 +274,8 @@
             android:contentDescription="Home"
             android:scaleType="centerInside"
             android:layout_marginHorizontal="8dp"
-            android:padding="6dp"/>
+            android:padding="6dp" />
 
-
-        <!-- Center Button -->
         <ImageButton
             android:id="@+id/button_start"
             android:layout_width="58dp"
@@ -210,9 +286,8 @@
             android:scaleType="centerInside"
             android:elevation="8dp"
             android:layout_marginHorizontal="8dp"
-            android:padding="8dp"/>
+            android:padding="8dp" />
 
-        <!-- Progress Button -->
         <ImageButton
             android:id="@+id/button_progress"
             android:layout_width="52dp"
@@ -221,9 +296,6 @@
             android:contentDescription="Progress"
             android:scaleType="centerInside"
             android:layout_marginHorizontal="8dp"
-            android:padding="6dp"/>
-
-
-
+            android:padding="6dp" />
     </LinearLayout>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -72,7 +72,8 @@ class SettingsActivity : AppCompatActivity() {
 
         // Set click listeners
         notificationsOption.setOnClickListener { showNotificationPermissionDialog() }
-        historyOption.setOnClickListener { navigateTo(CustomListViewActivity::class.java) }
+        //NAVIGATE TO THE ACTIVITIES CUSTOM LIST VIEW
+        //historyOption.setOnClickListener { navigateTo(CustomListViewActivity::class.java) }
         logoutOption.setOnClickListener { showLogoutConfirmation() }
         backArrow.setOnClickListener { finishWithAnimation() }
         aboutDevs.setOnClickListener { navigateTo(DevelopersActivity::class.java) }

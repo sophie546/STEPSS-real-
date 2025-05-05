@@ -16,9 +16,9 @@ class EmployeeDetailsActivity : Activity() {
 
         val imageViewPhoto = findViewById<ImageView>(R.id.imageview_photo)
         val textViewId = findViewById<TextView>(R.id.textview_id_number)
-        val textViewFirstname = findViewById<TextView>(R.id.textview_firstname)
+        //val textViewFirstname = findViewById<TextView>(R.id.textview_firstname)
         val textViewMiddlename = findViewById<TextView>(R.id.textview_middlename)
-        val textViewLastname = findViewById<TextView>(R.id.textview_lastname)
+        //val textViewLastname = findViewById<TextView>(R.id.textview_lastname)
 
         intent?.let{
             it?.getIntExtra("photo", R.drawable.android)?.let{photoId ->
@@ -29,17 +29,17 @@ class EmployeeDetailsActivity : Activity() {
                 textViewId.setText(empId)
             }
 
-            it?.getStringExtra("firstname")?.let{firstname ->
-                textViewFirstname.setText(firstname)
-            }
+//            it?.getStringExtra("firstname")?.let{firstname ->
+//                textViewFirstname.setText(firstname)
+//            }
 
             it?.getStringExtra("middlename")?.let{middlename ->
                 textViewMiddlename.setText(middlename)
             }
 
-            it?.getStringExtra("lastname")?.let{lastname ->
-                textViewLastname.setText(lastname)
-            }
+//            it?.getStringExtra("lastname")?.let{lastname ->
+//                textViewLastname.setText(lastname)
+//            }
         }
     }
 }

@@ -8,13 +8,16 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import com.bumptech.glide.Glide
+import com.example.stepss.data.ListItem
+import com.example.stepss.helper.AchievementCustomListViewAdapter
 
 class LandingPageActivity : AppCompatActivity() {
-    private lateinit var burgerIcon: ImageButton
+    private lateinit var settingsButton: ImageButton
     private lateinit var homeButton: ImageButton
     private lateinit var progressButton: ImageButton
 
@@ -23,21 +26,37 @@ class LandingPageActivity : AppCompatActivity() {
         setContentView(R.layout.landing_page)
 
         // Initialize views
-        val gifImageView = findViewById<ImageView>(R.id.gifImageView)
-        Glide.with(this).asGif().load(R.drawable.water).into(gifImageView)
+//        val gifImageView = findViewById<ImageView>(R.id.gifImageView)
+//        Glide.with(this).asGif().load(R.drawable.water).into(gifImageView)
 
         val profileButton: ImageButton = findViewById(R.id.profile_button)
-        burgerIcon = findViewById(R.id.burger_icon)
-        homeButton = findViewById(R.id.button_home)
         val startButton: ImageButton = findViewById(R.id.button_start)
+
+        settingsButton = findViewById(R.id.icon_settings)
+        homeButton = findViewById(R.id.button_home)
         progressButton = findViewById(R.id.button_progress)
+
+
+        val listView = findViewById<ListView>(R.id.list_view)
+
+        val listItems = listOf(
+            ListItem(R.drawable.icon_medal, "10,000 Steps", "Complete 10,000 steps in a single day"),
+            ListItem(R.drawable.icon_walking, "Daily Walker", "Walk every day for a week."),
+            ListItem(R.drawable.icon_globe, "Around the World", "Walk a total of 40,000 kilometers."),
+            ListItem(R.drawable.icon_flame, "Calories Burned", "Burn 500 calories in a single walk."),
+            ListItem(R.drawable.icon_target, "Goal Getter", "Achieve your daily step goal for 7 days.")
+        )
+
+        val adapter = AchievementCustomListViewAdapter(this, listItems)
+        listView.adapter = adapter
+
 
         // Set initial state (home selected by default)
         setSelectedButton(homeButton)
 
         // Add zoom effect to all buttons
         addZoomEffect(profileButton)
-        addZoomEffect(burgerIcon)
+        addZoomEffect(settingsButton)
         addZoomEffect(homeButton)
         addZoomEffect(startButton)
         addZoomEffect(progressButton)
@@ -62,9 +81,10 @@ class LandingPageActivity : AppCompatActivity() {
             navigateTo(WalkingTrackerActivity::class.java)
         }
 
-        burgerIcon.setOnClickListener { view ->
-            showPopupMenu(view)
+        settingsButton.setOnClickListener{
+            navigateTo(SettingsActivity::class.java)
         }
+
     }
 
     private fun navigateTo(targetClass: Class<*>) {
@@ -84,36 +104,6 @@ class LandingPageActivity : AppCompatActivity() {
         selectedButton.isSelected = true
     }
 
-    private fun showPopupMenu(view: View) {
-        val wrapper = ContextThemeWrapper(this, R.style.Theme_STEPSS)
-        val popupMenu = PopupMenu(wrapper, view)
-        popupMenu.menuInflater.inflate(R.menu.burger_menu, popupMenu.menu)
-
-        popupMenu.setOnMenuItemClickListener { item: MenuItem ->
-            when (item.itemId) {
-                R.id.nav_settings -> {
-                    navigateTo(SettingsActivity::class.java)
-                    true
-                }
-                R.id.nav_about -> {
-                    navigateTo(DevelopersActivity::class.java)
-                    true
-                }
-                else -> false
-            }
-        }
-
-        try {
-            val field = popupMenu.javaClass.getDeclaredField("mPopup")
-            field.isAccessible = true
-            val menuPopupHelper = field.get(popupMenu) as? androidx.appcompat.view.menu.MenuPopupHelper
-            menuPopupHelper?.setForceShowIcon(true)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        popupMenu.show()
-    }
 
     private fun addZoomEffect(button: ImageButton) {
         button.setOnTouchListener { v, event ->
@@ -129,4 +119,9 @@ class LandingPageActivity : AppCompatActivity() {
             true
         }
     }
+
+
+
 }
+
+

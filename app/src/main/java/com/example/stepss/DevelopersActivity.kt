@@ -77,25 +77,25 @@ class DevelopersActivity : Activity() {
         selectedButton?.isSelected = true
     }
 
-    private fun showPopupMenu(view: View) {
-        // Use ContextThemeWrapper to ensure proper theme
-        val wrapper = ContextThemeWrapper(this, R.style.Theme_STEPSS)
-        val popupMenu = PopupMenu(wrapper, view)
-
-        popupMenu.setOnMenuItemClickListener { item: MenuItem ->
-            when (item.itemId) {
-                R.id.nav_settings -> {
-                    navigateTo(SettingsActivity::class.java)
-                    true
-                }
-                R.id.nav_about -> {
-                    // Already on developers page
-                    true
-                }
-                else -> false
-            }
-        }
-    }
+//    private fun showPopupMenu(view: View) {
+//        // Use ContextThemeWrapper to ensure proper theme
+//        val wrapper = ContextThemeWrapper(this, R.style.Theme_STEPSS)
+//        val popupMenu = PopupMenu(wrapper, view)
+//
+//        popupMenu.setOnMenuItemClickListener { item: MenuItem ->
+//            when (item.itemId) {
+//                R.id.nav_settings -> {
+//                    navigateTo(SettingsActivity::class.java)
+//                    true
+//                }
+//                R.id.nav_about -> {
+//                    // Already on developers page
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
+//    }
 
     private fun showConfirmLogoutDialog() {
         AlertDialog.Builder(this)
