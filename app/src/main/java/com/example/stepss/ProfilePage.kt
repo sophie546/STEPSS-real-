@@ -1,22 +1,26 @@
 package com.example.stepss
 
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.net.Uri
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.stepss.EditProfilePage
+import com.example.stepss.LoginActivity
+import com.example.stepss.ProfilePage2
+import com.example.stepss.R
 
 class ProfilePage : AppCompatActivity() {
     private lateinit var textViewName: TextView
     private lateinit var textViewEmail: TextView
-    private lateinit var textViewTitle: TextView
-    private lateinit var textViewAddress: TextView
     private lateinit var profileImageView: ImageView
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -28,49 +32,56 @@ class ProfilePage : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("profile_prefs", MODE_PRIVATE)
 
         // Initialize views
-        textViewName = findViewById(R.id.edit_name)
-        textViewEmail = findViewById(R.id.edit_email)
-        textViewTitle = findViewById(R.id.edit_title)
-        textViewAddress = findViewById(R.id.edit_location)
+        textViewName = findViewById(R.id.name)
+        textViewEmail = findViewById(R.id.email_address)
         profileImageView = findViewById(R.id.profile_image)
+
+        val logoutButton: Button = findViewById(R.id.logout_button)
+        val editProfile: LinearLayout = findViewById(R.id.edit_profile_button)
+        val showProfile: LinearLayout = findViewById(R.id.profile_header)
+        val backArrow: ImageView = findViewById(R.id.back_button)
 
         // Set default profile image
         profileImageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.aloria))
 
-        // Load saved profile data
         loadProfileData()
 
-        val backArrow: ImageView = findViewById(R.id.back_button)
         backArrow.setOnClickListener {
             finish()
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
-
-        val logoutButton: Button = findViewById(R.id.logout_button)
-        val editProfile: TextView = findViewById(R.id.edit_profile)
 
         logoutButton.setOnClickListener {
             showLogoutConfirmation()
         }
 
         editProfile.setOnClickListener {
-            val intent = Intent(this, EditProfilePage::class.java).apply {
-                putExtra("CURRENT_NAME", textViewName.text.toString())
-                putExtra("CURRENT_EMAIL", textViewEmail.text.toString())
-                putExtra("CURRENT_TITLE", textViewTitle.text.toString())
-                putExtra("CURRENT_ADDRESS", textViewAddress.text.toString())
-            }
+            val intent = Intent(this, EditProfilePage::class.java)
+            intent.putExtra("CURRENT_NAME", textViewName.text.toString())
+            intent.putExtra("CURRENT_EMAIL", textViewEmail.text.toString())
+            startActivityForResult(intent, 1001)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
+
+        showProfile.setOnClickListener {
+            val intent = Intent(this, ProfilePage2::class.java)
+            intent.putExtra("CURRENT_NAME", textViewName.text.toString())
+            intent.putExtra("CURRENT_EMAIL", textViewEmail.text.toString())
             startActivityForResult(intent, 1001)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
 
     private fun loadProfileData() {
-        textViewName.text = sharedPreferences.getString("profile_name", "Default Name")
-        textViewEmail.text = sharedPreferences.getString("profile_email", "default@example.com")
-        textViewTitle.text = sharedPreferences.getString("profile_title", "No title set")
-        textViewAddress.text = sharedPreferences.getString("profile_address", "No address set")
+        val username = sharedPreferences.getString("profile_name", "Default Name")
+        val email = sharedPreferences.getString("profile_email", "")
 
+        textViewName.text = username ?: "Default Name"
+
+        // Display email only if it's not empty
+        textViewEmail.text = if (!email.isNullOrEmpty()) email else ""
+
+        // Load profile image if available
         sharedPreferences.getString("profile_image_uri", null)?.let { uriString ->
             try {
                 profileImageView.setImageURI(Uri.parse(uriString))
@@ -93,14 +104,6 @@ class ProfilePage : AppCompatActivity() {
                     textViewEmail.text = email
                     sharedPreferences.edit().putString("profile_email", email).apply()
                 }
-                it.getStringExtra("NEW_TITLE")?.let { title ->
-                    textViewTitle.text = title
-                    sharedPreferences.edit().putString("profile_title", title).apply()
-                }
-                it.getStringExtra("NEW_ADDRESS")?.let { address ->
-                    textViewAddress.text = address
-                    sharedPreferences.edit().putString("profile_address", address).apply()
-                }
                 it.getStringExtra("PROFILE_IMAGE_URI")?.let { uriString ->
                     try {
                         profileImageView.setImageURI(Uri.parse(uriString))
@@ -119,10 +122,10 @@ class ProfilePage : AppCompatActivity() {
             .setMessage("Are you sure you want to log out?")
             .setPositiveButton("Yes") { _, _ ->
                 sharedPreferences.edit().clear().apply()
-                Intent(this, LoginActivity::class.java).apply {
+                val intent = Intent(this, LoginActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(this)
                 }
+                startActivity(intent)
                 finish()
             }
             .setNegativeButton("No", null)

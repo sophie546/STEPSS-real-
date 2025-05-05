@@ -19,12 +19,10 @@ class WelcomeActivity : Activity() {
             startActivity((intent))
         }
 
-        val Guest = findViewById<Button>(R.id.button_VisitAsGuest)
-        Guest.setOnClickListener{
-            Log.e("Sample Project", "Button is clicked!")
-            Toast.makeText(this,"Feature not yet available :)", Toast.LENGTH_LONG).show()
-//            val intent = Intent(this, LandingPageActivity::class.java)
-//            startActivity((intent))
+        val login = findViewById<Button>(R.id.login)
+        login.setOnClickListener{
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity((intent))
         }
     }
 }

@@ -35,7 +35,6 @@ class RegisterActivity : Activity() {
             }
         }
 
-
         val buttonLogin = findViewById<Button>(R.id.button_login)
         buttonLogin.setOnClickListener {
             Log.e("Sample Project", "Button is clicked!")
@@ -73,14 +72,20 @@ class RegisterActivity : Activity() {
 
         return true
     }
-    //SAVE USER INPUTTED DATA
+
+    // SAVE USER INPUTTED DATA
     private fun saveUserData(username: String, password: String) {
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("USERNAME", username)
         editor.putString("PASSWORD", password)
+
+        // Set default values for email, contact, and location (to be updated later)
+        editor.putString("EMAIL", null)
+        editor.putString("CONTACT", null)
+        editor.putString("LOCATION", null)
+
         editor.apply() // Save data asynchronously
         Toast.makeText(this, "User registered successfully!", Toast.LENGTH_SHORT).show()
     }
-
 }

@@ -13,12 +13,13 @@ class LoginActivity : Activity() {
     private lateinit var editTextPassword: EditText
     private lateinit var buttonSignUpLogin: Button
     private lateinit var buttonCreateAccount: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_page)
 
         // Initialize views
-        editTextUsername = findViewById(R.id.editTextEmail) // or rename it to editTextUsername in XML for clarity
+        editTextUsername = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
         buttonSignUpLogin = findViewById(R.id.button_SignUpLogin)
         buttonCreateAccount = findViewById(R.id.button_CreateAccount)
@@ -35,7 +36,7 @@ class LoginActivity : Activity() {
         }
 
         buttonCreateAccount.setOnClickListener {
-            val intent = Intent(this,RegisterActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
     }
@@ -67,6 +68,12 @@ class LoginActivity : Activity() {
         val savedUsername = sharedPreferences.getString("USERNAME", null)
         val savedPassword = sharedPreferences.getString("PASSWORD", null)
 
-        return username == savedUsername && password == savedPassword
+        // Check if saved data is not null
+        if (savedUsername != null && savedPassword != null) {
+            return username == savedUsername && password == savedPassword
+        } else {
+            Toast.makeText(this, "No account found, please register", Toast.LENGTH_SHORT).show()
+            return false
+        }
     }
 }

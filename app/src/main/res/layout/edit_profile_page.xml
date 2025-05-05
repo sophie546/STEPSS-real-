@@ -17,6 +17,7 @@
             android:orientation="vertical">
 
             <!-- Modern App Bar with Back Button -->
+            <!-- Modern App Bar with Back Button -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -26,23 +27,21 @@
 
                 <ImageButton
                     android:id="@+id/back_button"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/circle_shape_modern"
+                    android:background="@drawable/gradient_background"
                     android:src="@drawable/left_arrow_white"
-                    android:backgroundTint="#6200ED"
-                    android:padding="8dp"/>
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
 
                 <TextView
-                    android:layout_marginRight="35dp"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="30dp"
                     android:text="Edit Profile"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:gravity="center"/>
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -81,40 +80,23 @@
                         android:contentDescription="Edit profile"
                         android:elevation="4dp"/>
 
+
                 </FrameLayout>
 
-                <!-- Profile Info Fields -->
+                <TextView
+                    android:id="@+id/edit_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Your Name"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:showDividers="middle">
-
-                    <!-- Name Field -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingVertical="12dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="NAME"
-                            android:textSize="12sp"
-                            android:textColor="#B0B0B0"
-                            android:layout_marginBottom="4dp"/>
-
-                        <EditText
-                            android:id="@+id/edit_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Enter your name"
-                            android:textSize="16sp"
-                            android:textColor="#FFFFFF"
-                            android:background="@null"
-                            android:paddingVertical="8dp"/>
-                    </LinearLayout>
 
                     <!-- Email Field -->
                     <LinearLayout
@@ -126,7 +108,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="EMAIL"
+                            android:text="Email"
                             android:textSize="12sp"
                             android:textColor="#B0B0B0"
                             android:layout_marginBottom="4dp"/>
@@ -142,7 +124,7 @@
                             android:paddingVertical="8dp"/>
                     </LinearLayout>
 
-                    <!-- Title Field -->
+                    <!-- Password Field -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -152,20 +134,48 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TITLE"
+                            android:text="Password"
                             android:textSize="12sp"
                             android:textColor="#B0B0B0"
                             android:layout_marginBottom="4dp"/>
 
                         <EditText
-                            android:id="@+id/edit_title"
+                            android:id="@+id/edit_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Enter your title"
+                            android:hint="Enter your password"
                             android:textSize="16sp"
                             android:textColor="#FFFFFF"
                             android:background="@null"
-                            android:paddingVertical="8dp"/>
+                            android:paddingVertical="8dp"
+                            android:inputType="textPassword"/>
+                    </LinearLayout>
+
+                    <!-- Contact Number Field -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingVertical="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Contact Number"
+                            android:textSize="12sp"
+                            android:textColor="#B0B0B0"
+                            android:layout_marginBottom="4dp"/>
+
+                        <EditText
+                            android:id="@+id/edit_contact"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter your contact number"
+                            android:textSize="16sp"
+                            android:textColor="#FFFFFF"
+                            android:background="@null"
+                            android:paddingVertical="8dp"
+                            android:inputType="phone"/>
                     </LinearLayout>
 
                     <!-- Location Field -->
@@ -178,7 +188,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="LOCATION"
+                            android:text="Location"
                             android:textSize="12sp"
                             android:textColor="#B0B0B0"
                             android:layout_marginBottom="4dp"/>
@@ -193,6 +203,7 @@
                             android:background="@null"
                             android:paddingVertical="8dp"/>
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <!-- Save Button -->
@@ -211,3 +222,6 @@
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
+
+
+
