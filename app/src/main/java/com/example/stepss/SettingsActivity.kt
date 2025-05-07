@@ -55,9 +55,6 @@ class SettingsActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("profile_prefs", MODE_PRIVATE)
 
         // Initialize views
-        profileImageView = findViewById(R.id.profile_image)
-        profileNameTextView = findViewById(R.id.profile_name)
-        profileEmailTextView = findViewById(R.id.profile_email)
 
 
         loadProfileData()
@@ -68,7 +65,6 @@ class SettingsActivity : AppCompatActivity() {
         val backArrow = findViewById<LinearLayout>(R.id.back_arrow)
         val aboutDevs = findViewById<LinearLayout>(R.id.option_about_devs)
         val historyOption = findViewById<LinearLayout>(R.id.option_history_container)
-        val profileSection = findViewById<LinearLayout>(R.id.profile_section)
 
         // Set click listeners
         notificationsOption.setOnClickListener { showNotificationPermissionDialog() }
@@ -77,7 +73,6 @@ class SettingsActivity : AppCompatActivity() {
         logoutOption.setOnClickListener { showLogoutConfirmation() }
         backArrow.setOnClickListener { finishWithAnimation() }
         aboutDevs.setOnClickListener { navigateTo(DevelopersActivity::class.java) }
-        profileSection.setOnClickListener { openEditProfile() }
     }
 
     private fun loadProfileData() {
