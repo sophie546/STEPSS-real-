@@ -19,7 +19,6 @@ class ActivityProgress : Activity() {
     private lateinit var historyContainer: LinearLayout
     private lateinit var homeButton: ImageButton
     private lateinit var progressButton: ImageButton
-    private lateinit var burgerIcon: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_progress)
@@ -28,7 +27,6 @@ class ActivityProgress : Activity() {
         historyContainer = findViewById(R.id.historyContainer)
         homeButton = findViewById(R.id.button_home)
         progressButton = findViewById(R.id.button_progress)
-        burgerIcon = findViewById(R.id.burger_icon)
         val startButton: ImageButton = findViewById(R.id.button_start)
 
         // Set initial state (progress button selected)
@@ -39,7 +37,6 @@ class ActivityProgress : Activity() {
         addZoomEffect(homeButton)
         addZoomEffect(startButton)
         addZoomEffect(progressButton)
-        addZoomEffect(burgerIcon)
 
         // Get current session data
         val stepCount = intent.getStringExtra("STEP_COUNT") ?: "0"
@@ -97,9 +94,12 @@ class ActivityProgress : Activity() {
         val sharedPref = getSharedPreferences("StepHistory", MODE_PRIVATE)
         with(sharedPref.edit()) {
             putString("last_session_$date", "Steps: $steps, Distance: $distance km")
+            putString("last_steps", steps) // Save the most recent step count
+            putString("last_distance", distance) // Save the most recent distance
             apply()
         }
     }
+
 
     private fun displayHistory() {
         val sharedPref = getSharedPreferences("StepHistory", MODE_PRIVATE)

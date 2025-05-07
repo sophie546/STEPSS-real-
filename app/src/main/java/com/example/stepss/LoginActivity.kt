@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 
 class LoginActivity : Activity() {
 
@@ -18,6 +20,9 @@ class LoginActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_page)
+
+        val gifImageView = findViewById<ImageView>(R.id.gifViewLogin)
+        Glide.with(this).asGif().load(R.drawable.walkinganimation_nobackground2).into(gifImageView)
 
         // Initialize views
         editTextUsername = findViewById(R.id.editTextEmail)

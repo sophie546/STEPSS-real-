@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 
 class RegisterActivity : Activity() {
 
@@ -17,6 +19,9 @@ class RegisterActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register_page)
+
+        val gifImageView = findViewById<ImageView>(R.id.gifViewRegister)
+        Glide.with(this).asGif().load(R.drawable.walkinganimation_nobackground2).into(gifImageView)
 
         // Initialize EditText fields
         editTextUsername = findViewById(R.id.edit_text_username)

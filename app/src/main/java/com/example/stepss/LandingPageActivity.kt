@@ -69,6 +69,18 @@ class LandingPageActivity : AppCompatActivity() {
 
         // Set up custom list view for achievements
         setupAchievementsList()
+
+        sharedPreferences = getSharedPreferences("StepHistory", MODE_PRIVATE)
+
+        val mostRecentSteps = sharedPreferences.getString("last_steps", "0")
+        val mostRecentDistance = sharedPreferences.getString("last_distance", "0")
+
+        // Update the UI with the most recent data
+        val distanceTextView = findViewById<TextView>(R.id.txt_distance)
+        val stepsTextView = findViewById<TextView>(R.id.txt_steps)
+
+        distanceTextView.text = "$mostRecentDistance"
+        stepsTextView.text = "$mostRecentSteps"
     }
 
     override fun onResume() {

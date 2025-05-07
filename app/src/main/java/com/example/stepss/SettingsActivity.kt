@@ -17,35 +17,35 @@ import androidx.core.content.ContextCompat
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var profileImageView: ImageView
-    private lateinit var profileNameTextView: TextView
-    private lateinit var profileEmailTextView: TextView
+//    private lateinit var profileImageView: ImageView
+//    private lateinit var profileNameTextView: TextView
+//    private lateinit var profileEmailTextView: TextView
 
-    private val editProfileLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val data = result.data
-            data?.let {
-                it.getStringExtra("NEW_NAME")?.let { name ->
-                    profileNameTextView.text = name
-                    sharedPreferences.edit().putString("profile_name", name).apply()
-                }
-                it.getStringExtra("NEW_EMAIL")?.let { email ->
-                    profileEmailTextView.text = email
-                    sharedPreferences.edit().putString("profile_email", email).apply()
-                }
-                it.getStringExtra("PROFILE_IMAGE_URI")?.let { uriString ->
-                    try {
-                        profileImageView.setImageURI(Uri.parse(uriString))
-                        sharedPreferences.edit().putString("profile_image_uri", uriString).apply()
-                    } catch (e: Exception) {
-                        Log.e("SettingsActivity", "Error setting profile image", e)
-                    }
-                }
-            }
-        }
-    }
+//    private val editProfileLauncher = registerForActivityResult(
+//        ActivityResultContracts.StartActivityForResult()
+//    ) { result ->
+//        if (result.resultCode == RESULT_OK) {
+//            val data = result.data
+//            data?.let {
+//                it.getStringExtra("NEW_NAME")?.let { name ->
+//                    profileNameTextView.text = name
+//                    sharedPreferences.edit().putString("profile_name", name).apply()
+//                }
+//                it.getStringExtra("NEW_EMAIL")?.let { email ->
+//                    profileEmailTextView.text = email
+//                    sharedPreferences.edit().putString("profile_email", email).apply()
+//                }
+//                it.getStringExtra("PROFILE_IMAGE_URI")?.let { uriString ->
+//                    try {
+//                        profileImageView.setImageURI(Uri.parse(uriString))
+//                        sharedPreferences.edit().putString("profile_image_uri", uriString).apply()
+//                    } catch (e: Exception) {
+//                        Log.e("SettingsActivity", "Error setting profile image", e)
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +56,7 @@ class SettingsActivity : AppCompatActivity() {
 
 
 
-        loadProfileData()
+        //loadProfileData()
 
         // Initialize other views
         val notificationsOption = findViewById<LinearLayout>(R.id.option_notifications)
@@ -73,27 +73,27 @@ class SettingsActivity : AppCompatActivity() {
         aboutDevs.setOnClickListener { navigateTo(DevelopersActivity::class.java) }
     }
 
-    private fun loadProfileData() {
-        profileNameTextView.text = sharedPreferences.getString("profile_name", "Default Name")
-        profileEmailTextView.text = sharedPreferences.getString("profile_email", "default@example.com")
+//    private fun loadProfileData() {
+//        profileNameTextView.text = sharedPreferences.getString("profile_name", "Default Name")
+//        profileEmailTextView.text = sharedPreferences.getString("profile_email", "default@example.com")
+//
+//        sharedPreferences.getString("profile_image_uri", null)?.let { uriString ->
+//            try {
+//                profileImageView.setImageURI(Uri.parse(uriString))
+//            } catch (e: Exception) {
+//                Log.e("SettingsActivity", "Error loading profile image", e)
+//            }
+//        }
+//    }
 
-        sharedPreferences.getString("profile_image_uri", null)?.let { uriString ->
-            try {
-                profileImageView.setImageURI(Uri.parse(uriString))
-            } catch (e: Exception) {
-                Log.e("SettingsActivity", "Error loading profile image", e)
-            }
-        }
-    }
-
-    private fun openEditProfile() {
-        Intent(this, EditProfilePage::class.java).apply {
-            putExtra("CURRENT_NAME", profileNameTextView.text.toString())
-            putExtra("CURRENT_EMAIL", profileEmailTextView.text.toString())
-            editProfileLauncher.launch(this)
-        }
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-    }
+//    private fun openEditProfile() {
+//        Intent(this, EditProfilePage::class.java).apply {
+//            putExtra("CURRENT_NAME", profileNameTextView.text.toString())
+//            putExtra("CURRENT_EMAIL", profileEmailTextView.text.toString())
+//            editProfileLauncher.launch(this)
+//        }
+//        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+//    }
 
     private fun showNotificationPermissionDialog() {
         AlertDialog.Builder(this)

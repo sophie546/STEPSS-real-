@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@drawable/modern_card_bg3"
-                android:padding="20dp"
+                android:padding="5dp"
                 android:gravity="center"
                 android:layout_marginBottom="24dp"
                 android:elevation="2dp">
@@ -134,7 +134,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="0.60km"
                                 android:textColor="@color/white"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                         <!-- Steps Box -->
@@ -160,7 +160,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="204"
                                 android:textColor="@color/white"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -169,11 +169,13 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Stay active by hitting your 3,000-step daily goal!"
+                        android:layout_marginTop="0dp"
+                        android:text="🏃‍♀️ Reach your 3,000-step goal daily!"
                         android:textColor="@color/white"
                         android:textSize="12sp"
-                        android:maxLines="2" />
+                        android:maxLines="2"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"/>
                 </LinearLayout>
 
                 <!-- RIGHT SIDE: Progress Ring -->
