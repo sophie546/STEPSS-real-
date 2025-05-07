@@ -91,7 +91,7 @@ class ProfilePage : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1001 && resultCode == RESULT_OK) {
             data?.let {
-                it.getParcelableExtra<ProfileData>("PROFILE_DATA")?.let { profile ->
+                it.getParcelableExtra<ProfileData>("UPDATED_PROFILE_DATA")?.let { profile ->
                     // Update UI
                     textViewName.text = profile.name ?: ""
                     textViewEmail.text = profile.email ?: ""
@@ -114,6 +114,7 @@ class ProfilePage : AppCompatActivity() {
             }
         }
     }
+
 
     private fun getCurrentProfileData(): ProfileData {
         val name = sharedPreferences.getString("USERNAME", null)

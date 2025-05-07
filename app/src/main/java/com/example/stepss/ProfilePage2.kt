@@ -14,6 +14,12 @@ class ProfilePage2 : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
 
+    private lateinit var nameTextView: TextView
+    private lateinit var emailTextView: TextView
+    private lateinit var passwordTextView: TextView
+    private lateinit var contactNumberTextView: TextView
+    private lateinit var locationTextView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile_page2)
@@ -23,21 +29,15 @@ class ProfilePage2 : AppCompatActivity() {
         val editProfileButton = findViewById<Button>(R.id.edit_profile)
         val backArrow: ImageView = findViewById(R.id.back_button)
 
-        val nameTextView = findViewById<TextView>(R.id.username)
-        val emailTextView = findViewById<TextView>(R.id.email)
-        val passwordTextView = findViewById<TextView>(R.id.password)
-        val contactNumberTextView = findViewById<TextView>(R.id.contact_number)
-        val locationTextView = findViewById<TextView>(R.id.location)
+        nameTextView = findViewById(R.id.username)
+        emailTextView = findViewById(R.id.email)
+        passwordTextView = findViewById(R.id.password)
+        contactNumberTextView = findViewById(R.id.contact_number)
+        locationTextView = findViewById(R.id.location)
 
-        // Load data from SharedPreferences
+        // Load and display current profile data
         val profileData = getCurrentProfileData()
-
-        // Set the data into the UI
-        nameTextView.text = profileData.name ?: "null"
-        emailTextView.text = profileData.email ?: "null"
-        passwordTextView.text = profileData.password ?: "null"
-        contactNumberTextView.text = profileData.contact ?: "null"
-        locationTextView.text = profileData.location ?: "null"
+        setProfileDataToUI(profileData)
 
         backArrow.setOnClickListener {
             finish()
@@ -63,5 +63,36 @@ class ProfilePage2 : AppCompatActivity() {
         val uri = uriString?.let { Uri.parse(it) }
 
         return ProfileData(name, password, email, contact, location, uri)
+    }
+
+    private fun setProfileDataToUI(profileData: ProfileData) {
+        nameTextView.text = profileData.name ?: "null"
+        emailTextView.text = profileData.email ?: "null"
+        passwordTextView.text = profileData.password ?: "null"
+        contactNumberTextView.text = profileData.contact ?: "null"
+        locationTextView.text = profileData.location ?: "null"
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1001 && resultCode == RESULT_OK && data != null) {
+            val updatedProfileData = data.getParcelableExtra<ProfileData>("UPDATED_PROFILE_DATA")
+            if (updatedProfileData != null) {
+                // Update the UI
+                setProfileDataToUI(updatedProfileData)
+
+                // Save updated data to SharedPreferences
+                with(sharedPreferences.edit()) {
+                    putString("USERNAME", updatedProfileData.name)
+                    putString("PASSWORD", updatedProfileData.password)
+                    putString("EMAIL", updatedProfileData.email)
+                    putString("CONTACT", updatedProfileData.contact)
+                    putString("LOCATION", updatedProfileData.location)
+                    putString("PROFILE_IMAGE_URI", updatedProfileData.imageUri?.toString())
+                    apply()
+                }
+            }
+        }
     }
 }
