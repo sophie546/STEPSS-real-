@@ -49,6 +49,8 @@
                 android:background="@drawable/modern_card_bg"
                 android:padding="24dp"
                 android:layout_marginBottom="24dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:gravity="center_horizontal"
                 android:elevation="4dp">
 
@@ -62,19 +64,26 @@
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:scaleType="centerCrop"
-                        android:background="@drawable/circle_border_white"/>
+                        android:background="@drawable/circle_border_white" />
 
-                    <ImageButton
-                        android:id="@+id/profile_image_view"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/editpfp"
-                        android:background="@drawable/circle_shape_modern"
-                        android:backgroundTint="#2DAA9E"
-                        android:layout_gravity="bottom|end"
-                        android:contentDescription="Edit profile"
-                        android:elevation="4dp"/>
+                    <!-- Use a small circular container with a white background -->
+                    <FrameLayout
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="bottom|end">
+
+                        <ImageView
+                            android:id="@+id/profile_image_view"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icon_edit_profile_white"
+                            android:scaleType="fitCenter"
+                            android:contentDescription="Edit profile" />
+                    </FrameLayout>
                 </FrameLayout>
+
+
 
                 <EditText
                     android:id="@+id/edit_name"
@@ -176,7 +185,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:paddingVertical="12dp">
+                        android:paddingTop="12dp"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -198,19 +208,19 @@
                             android:paddingVertical="8dp"/>
                     </LinearLayout>
                 </LinearLayout>
-
-                <Button
-                    android:id="@+id/save_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="SAVE CHANGES"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:background="@drawable/rounded_button_blue"
-                    android:textColor="#FFFFFF"
-                    android:paddingVertical="12dp"/>
             </LinearLayout>
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SAVE CHANGES"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:background="@drawable/rounded_button_blue"
+                android:textColor="#FFFFFF"
+                android:paddingVertical="12dp"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

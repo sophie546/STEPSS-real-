@@ -3,6 +3,7 @@ package com.example.stepss
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -33,10 +34,12 @@ class LoginActivity : Activity() {
         buttonSignUpLogin.setOnClickListener {
             if (validateInputs()) {
                 if (checkCredentials()) {
+                    Log.d("LoginActivity", "Login successful for user: ${editTextUsername.text}")
                     Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, LandingPageActivity::class.java))
                     finish()
                 } else {
+                    Log.d("LoginActivity", "Login failed for user: ${editTextUsername.text}")
                     Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -49,7 +52,7 @@ class LoginActivity : Activity() {
         }
     }
 
-    // Check for empty fields
+    // Check for empty fields and validate input format
     private fun validateInputs(): Boolean {
         val username = editTextUsername.text.toString().trim()
         val password = editTextPassword.text.toString().trim()
@@ -61,6 +64,10 @@ class LoginActivity : Activity() {
             }
             password.isEmpty() -> {
                 editTextPassword.error = "Password is required"
+                false
+            }
+            password.length < 6 -> {
+                editTextPassword.error = "Password must be at least 6 characters"
                 false
             }
             else -> true
@@ -76,6 +83,19 @@ class LoginActivity : Activity() {
         val savedUsername = sharedPreferences.getString("USERNAME", null)
         val savedPassword = sharedPreferences.getString("PASSWORD", null)
 
-        return savedUsername == inputUsername && savedPassword == inputPassword
+        // Log the credential check for debugging
+        Log.d("LoginActivity", "Checking credentials - Input: $inputUsername, Saved: $savedUsername")
+
+        // Check if credentials exist and match
+        return if (savedUsername != null && savedPassword != null) {
+            val credentialsMatch = savedUsername == inputUsername && savedPassword == inputPassword
+            if (!credentialsMatch) {
+                Log.d("LoginActivity", "Credentials mismatch - Username match: ${savedUsername == inputUsername}, Password match: ${savedPassword == inputPassword}")
+            }
+            credentialsMatch
+        } else {
+            Log.d("LoginActivity", "No saved credentials found")
+            false
+        }
     }
 }

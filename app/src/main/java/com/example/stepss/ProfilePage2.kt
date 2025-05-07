@@ -75,22 +75,25 @@ class ProfilePage2 : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1001 && resultCode == RESULT_OK) {
+            data?.let {
+                val updatedProfile = it.getParcelableExtra<ProfileData>("UPDATED_PROFILE_DATA")
+                updatedProfile?.let { profile ->
+                    // Update UI with the updated profile data
+                    setProfileDataToUI(profile)
 
-        if (requestCode == 1001 && resultCode == RESULT_OK && data != null) {
-            val updatedProfileData = data.getParcelableExtra<ProfileData>("UPDATED_PROFILE_DATA")
-            if (updatedProfileData != null) {
-                // Update the UI
-                setProfileDataToUI(updatedProfileData)
-
-                // Save updated data to SharedPreferences
-                with(sharedPreferences.edit()) {
-                    putString("USERNAME", updatedProfileData.name)
-                    putString("PASSWORD", updatedProfileData.password)
-                    putString("EMAIL", updatedProfileData.email)
-                    putString("CONTACT", updatedProfileData.contact)
-                    putString("LOCATION", updatedProfileData.location)
-                    putString("PROFILE_IMAGE_URI", updatedProfileData.imageUri?.toString())
-                    apply()
+                    // Save the updated profile data to SharedPreferences
+                    with(sharedPreferences.edit()) {
+                        putString("USERNAME", profile.name)
+                        putString("PASSWORD", profile.password)
+                        putString("EMAIL", profile.email)
+                        putString("CONTACT", profile.contact)
+                        putString("LOCATION", profile.location)
+                        profile.imageUri?.let { uri ->
+                            putString("PROFILE_IMAGE_URI", uri.toString())
+                        }
+                        apply()
+                    }
                 }
             }
         }

@@ -19,7 +19,7 @@ import java.io.File
 class EditProfilePage : AppCompatActivity() {
 
     private lateinit var profileImageView: ImageView
-    private lateinit var editProfileImageButton: ImageButton
+    private lateinit var editProfileImageButton: ImageView
 
     private lateinit var editTextName: EditText
     private lateinit var editTextPassword: EditText

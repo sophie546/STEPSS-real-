@@ -34,50 +34,7 @@
             android:textColor="#FFFFFF"/>
     </LinearLayout>
 
-    <!-- Profile Section -->
-    <LinearLayout
-        android:id="@+id/profile_section"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="16dp"
-        android:background="@drawable/gradient_background"
-        android:clickable="true"
-        android:focusable="true">
 
-        <ImageView
-            android:id="@+id/profile_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/profile_circle"
-            android:scaleType="fitCenter"
-            android:padding="5dp"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="12dp">
-
-            <TextView
-                android:id="@+id/profile_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sophia Bianca Aloria"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"/>
-
-            <TextView
-                android:id="@+id/profile_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="sophiabiancaaloria@gmail.com"
-                android:textSize="14sp"
-                android:textColor="#FFFFFF"/>
-        </LinearLayout>
-    </LinearLayout>
 
     <!-- Settings Options -->
     <LinearLayout

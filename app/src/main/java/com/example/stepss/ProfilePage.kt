@@ -94,14 +94,17 @@ class ProfilePage : AppCompatActivity() {
                 val updatedProfile = it.getParcelableExtra<ProfileData>("UPDATED_PROFILE_DATA")
                 Log.d("ProfilePage", "Updated profile data: $updatedProfile")
                 updatedProfile?.let { profile ->
-                    // Update UI with the updated profile data
+                    // Update UI immediately with the updated profile data
                     textViewName.text = profile.name ?: ""
                     textViewEmail.text = profile.email ?: ""
+
+                    // Update profile image if changed
                     profile.imageUri?.let { uri ->
                         try {
                             profileImageView.setImageURI(uri)
                         } catch (e: Exception) {
                             Log.e("ProfilePage", "Error setting profile image", e)
+                            profileImageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.profile_picture))
                         }
                     }
 
@@ -112,11 +115,8 @@ class ProfilePage : AppCompatActivity() {
                         profile.imageUri?.let { uri ->
                             putString("PROFILE_IMAGE_URI", uri.toString())
                         }
-                        apply()  // Use apply() instead of commit for async saving
+                        apply()
                     }
-
-                    // Reload profile data to ensure UI updates
-                    loadProfileData()
                 }
             }
         }

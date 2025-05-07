@@ -3,6 +3,7 @@ package com.example.stepss
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -14,10 +15,14 @@ class LandingPageActivity : AppCompatActivity() {
     private lateinit var homeButton: ImageButton
     private lateinit var progressButton: ImageButton
     private lateinit var usernameTextView: TextView
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.landing_page)
+
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
 
         // Setup animated GIF
         val gifImageView = findViewById<ImageView>(R.id.gifImageView)
@@ -33,21 +38,29 @@ class LandingPageActivity : AppCompatActivity() {
         // Initialize username text view
         usernameTextView = findViewById(R.id.username)
 
-        // Username in the UpperRight. Sets Text
-        val sharedPreferences: SharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-        val savedUsername = sharedPreferences.getString("USERNAME", "User")
-        usernameTextView.text = "$savedUsername!"
+        // Update username display
+        updateUsernameDisplay()
 
         // Set default button state
         setSelectedButton(homeButton)
 
-        // Setup navigation
-        profileButton.setOnClickListener { navigateTo(ProfilePage::class.java) }
-        startButton.setOnClickListener { navigateTo(WalkingTrackerActivity::class.java) }
-        settingsButton.setOnClickListener { navigateTo(SettingsActivity::class.java) }
+        // Setup navigation with animations
+        profileButton.setOnClickListener {
+            navigateTo(ProfilePage::class.java)
+            addZoomEffect(profileButton)
+        }
+        startButton.setOnClickListener {
+            navigateTo(WalkingTrackerActivity::class.java)
+            addZoomEffect(startButton)
+        }
+        settingsButton.setOnClickListener {
+            navigateTo(SettingsActivity::class.java)
+            addZoomEffect(settingsButton)
+        }
         progressButton.setOnClickListener {
             setSelectedButton(progressButton)
             navigateTo(ActivityProgress::class.java)
+            addZoomEffect(progressButton)
         }
         homeButton.setOnClickListener {
             setSelectedButton(homeButton)
@@ -55,6 +68,22 @@ class LandingPageActivity : AppCompatActivity() {
         }
 
         // Set up custom list view for achievements
+        setupAchievementsList()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Update username display when returning to this activity
+        updateUsernameDisplay()
+    }
+
+    private fun updateUsernameDisplay() {
+        val savedUsername = sharedPreferences.getString("USERNAME", "User")
+        usernameTextView.text = "$savedUsername!"
+        Log.d("LandingPage", "Updated username display: $savedUsername")
+    }
+
+    private fun setupAchievementsList() {
         val listView = findViewById<ListView>(R.id.list_view)
         val listItems = listOf(
             ListItem(R.drawable.icon_medal, "10,000 Steps", "Complete 10,000 steps in a single day"),
