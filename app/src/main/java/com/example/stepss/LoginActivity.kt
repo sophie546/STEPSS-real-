@@ -24,7 +24,12 @@ class LoginActivity : Activity() {
         buttonSignUpLogin = findViewById(R.id.button_SignUpLogin)
         buttonCreateAccount = findViewById(R.id.button_CreateAccount)
 
-        // Login button
+        // Check if a user is already registered
+        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        val savedUsername = sharedPreferences.getString("USERNAME", null)
+        val savedPassword = sharedPreferences.getString("PASSWORD", null)
+
+        // Login button logic
         buttonSignUpLogin.setOnClickListener {
             if (validateInputs()) {
                 if (checkCredentials()) {
@@ -37,7 +42,7 @@ class LoginActivity : Activity() {
             }
         }
 
-        // Navigate to register
+        // Navigate to RegisterActivity
         buttonCreateAccount.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()

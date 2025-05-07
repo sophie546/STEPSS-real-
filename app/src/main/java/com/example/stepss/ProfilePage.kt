@@ -25,7 +25,6 @@ class ProfilePage : AppCompatActivity() {
         setContentView(R.layout.profile_page)
         Log.d("ProfilePage", "Activity created")
 
-        // Consistently use "UserPrefs"
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
 
         textViewName = findViewById(R.id.name)
@@ -87,12 +86,15 @@ class ProfilePage : AppCompatActivity() {
         }
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1001 && resultCode == RESULT_OK) {
             data?.let {
-                it.getParcelableExtra<ProfileData>("UPDATED_PROFILE_DATA")?.let { profile ->
-                    // Update UI
+                val updatedProfile = it.getParcelableExtra<ProfileData>("UPDATED_PROFILE_DATA")
+                Log.d("ProfilePage", "Updated profile data: $updatedProfile")
+                updatedProfile?.let { profile ->
+                    // Update UI with the updated profile data
                     textViewName.text = profile.name ?: ""
                     textViewEmail.text = profile.email ?: ""
                     profile.imageUri?.let { uri ->
@@ -103,13 +105,18 @@ class ProfilePage : AppCompatActivity() {
                         }
                     }
 
-                    // Save to SharedPreferences using UserPrefs keys
+                    // Save the updated profile data to SharedPreferences
                     with(sharedPreferences.edit()) {
                         putString("USERNAME", profile.name)
                         putString("EMAIL", profile.email)
-                        profile.imageUri?.let { uri -> putString("PROFILE_IMAGE_URI", uri.toString()) }
-                        apply()
+                        profile.imageUri?.let { uri ->
+                            putString("PROFILE_IMAGE_URI", uri.toString())
+                        }
+                        apply()  // Use apply() instead of commit for async saving
                     }
+
+                    // Reload profile data to ensure UI updates
+                    loadProfileData()
                 }
             }
         }
@@ -127,8 +134,6 @@ class ProfilePage : AppCompatActivity() {
 
         return ProfileData(name, password, email, contact, location, uri)
     }
-
-
 
     private fun showLogoutConfirmation() {
         AlertDialog.Builder(this)
