@@ -3,11 +3,7 @@ package com.example.stepss
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.stepss.data.ListItem
@@ -18,71 +14,47 @@ class LandingPageActivity : AppCompatActivity() {
     private lateinit var homeButton: ImageButton
     private lateinit var progressButton: ImageButton
     private lateinit var usernameTextView: TextView
-    private lateinit var ageCountryTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.landing_page)
 
-        // Initialize views
+        // Setup animated GIF
         val gifImageView = findViewById<ImageView>(R.id.gifImageView)
         Glide.with(this).asGif().load(R.drawable.water).into(gifImageView)
 
-        val profileButton: ImageButton = findViewById(R.id.profile_button)
-        val startButton: ImageButton = findViewById(R.id.button_start)
-
+        // Initialize buttons
+        val profileButton = findViewById<ImageButton>(R.id.profile_button)
+        val startButton = findViewById<ImageButton>(R.id.button_start)
         settingsButton = findViewById(R.id.icon_settings)
         homeButton = findViewById(R.id.button_home)
         progressButton = findViewById(R.id.button_progress)
 
-        // Initialize TextViews
+        // Initialize username text view
         usernameTextView = findViewById(R.id.username)
-        ageCountryTextView = findViewById(R.id.age_country)
 
-        // Set initial state (home selected by default)
+        // Username in the UpperRight. Sets Text
+        val sharedPreferences: SharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        val savedUsername = sharedPreferences.getString("USERNAME", "User")
+        usernameTextView.text = "$savedUsername!"
+
+        // Set default button state
         setSelectedButton(homeButton)
 
-        // Set click listeners for buttons
-        profileButton.setOnClickListener {
-            val intent = Intent(this, ProfilePage::class.java)
-            startActivity(intent)
+        // Setup navigation
+        profileButton.setOnClickListener { navigateTo(ProfilePage::class.java) }
+        startButton.setOnClickListener { navigateTo(WalkingTrackerActivity::class.java) }
+        settingsButton.setOnClickListener { navigateTo(SettingsActivity::class.java) }
+        progressButton.setOnClickListener {
+            setSelectedButton(progressButton)
+            navigateTo(ActivityProgress::class.java)
         }
-
-
         homeButton.setOnClickListener {
             setSelectedButton(homeButton)
             Toast.makeText(this, "Already on home page", Toast.LENGTH_SHORT).show()
         }
 
-        progressButton.setOnClickListener {
-            setSelectedButton(progressButton)
-            navigateTo(ActivityProgress::class.java)
-        }
-
-        startButton.setOnClickListener {
-            navigateTo(WalkingTrackerActivity::class.java)
-        }
-
-        settingsButton.setOnClickListener {
-            navigateTo(SettingsActivity::class.java)
-        }
-
-        // Retrieve username, age, and location from SharedPreferences
-        val sharedPreferences: SharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-        val savedUsername = sharedPreferences.getString("USERNAME", "Unknown User")
-        val savedAge = ""  // Age is set to empty string
-        val savedLocation = ""  // Location is set to empty string
-
-        // Update UI with the data
-        usernameTextView.text = savedUsername
-        if(savedAge.isEmpty() || savedLocation.isEmpty()){
-            ageCountryTextView.text = "$savedAge  $savedLocation"
-        }else{
-            ageCountryTextView.text = "$savedAge yrs · $savedLocation"
-        }
-
-
-        //CUSTOM LIST VIEW...
+        // Set up custom list view for achievements
         val listView = findViewById<ListView>(R.id.list_view)
         val listItems = listOf(
             ListItem(R.drawable.icon_medal, "10,000 Steps", "Complete 10,000 steps in a single day"),
@@ -96,13 +68,8 @@ class LandingPageActivity : AppCompatActivity() {
     }
 
     private fun navigateTo(targetClass: Class<*>) {
-        try {
-            val intent = Intent(this, targetClass)
-            startActivity(intent)
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-        } catch (e: Exception) {
-            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
+        startActivity(Intent(this, targetClass))
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
     private fun setSelectedButton(selectedButton: ImageButton) {
@@ -125,13 +92,4 @@ class LandingPageActivity : AppCompatActivity() {
             true
         }
     }
-
 }
-
-
-
-
-
-
-
-

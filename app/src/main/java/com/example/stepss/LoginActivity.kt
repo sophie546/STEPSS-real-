@@ -24,56 +24,53 @@ class LoginActivity : Activity() {
         buttonSignUpLogin = findViewById(R.id.button_SignUpLogin)
         buttonCreateAccount = findViewById(R.id.button_CreateAccount)
 
-        // Button click listener
+        // Login button
         buttonSignUpLogin.setOnClickListener {
-            if (validateInputs() && checkCredentials()) {
-                Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, LandingPageActivity::class.java)
-                startActivity(intent)
-            } else {
-                Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show()
+            if (validateInputs()) {
+                if (checkCredentials()) {
+                    Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, LandingPageActivity::class.java))
+                    finish()
+                } else {
+                    Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
+        // Navigate to register
         buttonCreateAccount.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
         }
     }
 
-    // Validate if fields are empty
+    // Check for empty fields
     private fun validateInputs(): Boolean {
         val username = editTextUsername.text.toString().trim()
         val password = editTextPassword.text.toString().trim()
 
-        if (username.isEmpty()) {
-            editTextUsername.error = "Username is required"
-            return false
+        return when {
+            username.isEmpty() -> {
+                editTextUsername.error = "Username is required"
+                false
+            }
+            password.isEmpty() -> {
+                editTextPassword.error = "Password is required"
+                false
+            }
+            else -> true
         }
-
-        if (password.isEmpty()) {
-            editTextPassword.error = "Password is required"
-            return false
-        }
-
-        return true
     }
 
-    // Check credentials against stored user data
+    // Match credentials with stored data
     private fun checkCredentials(): Boolean {
-        val username = editTextUsername.text.toString().trim()
-        val password = editTextPassword.text.toString().trim()
+        val inputUsername = editTextUsername.text.toString().trim()
+        val inputPassword = editTextPassword.text.toString().trim()
 
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
         val savedUsername = sharedPreferences.getString("USERNAME", null)
         val savedPassword = sharedPreferences.getString("PASSWORD", null)
 
-        // Check if saved data is not null
-        if (savedUsername != null && savedPassword != null) {
-            return username == savedUsername && password == savedPassword
-        } else {
-            Toast.makeText(this, "No account found, please register", Toast.LENGTH_SHORT).show()
-            return false
-        }
+        return savedUsername == inputUsername && savedPassword == inputPassword
     }
 }

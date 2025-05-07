@@ -22,19 +22,34 @@ class AchievementCustomListViewAdapter(
     override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = convertView ?: LayoutInflater.from(context)
-            .inflate(R.layout.achievement_custom_listview, parent, false)
+        val holder: ViewHolder
+        val view: View
 
-        val itemLogo: ImageView = view.findViewById(R.id.item_logo)
-        val itemTitle: TextView = view.findViewById(R.id.item_title)
-        val itemDescription: TextView = view.findViewById(R.id.item_description)
+        if (convertView == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.achievement_custom_listview, parent, false)
+            holder = ViewHolder(
+                itemLogo = view.findViewById(R.id.item_logo),
+                itemTitle = view.findViewById(R.id.item_title),
+                itemDescription = view.findViewById(R.id.item_description)
+            )
+            view.tag = holder
+        } else {
+            view = convertView
+            holder = view.tag as ViewHolder
+        }
 
         val currentItem = listItems[position]
-
-        itemLogo.setImageResource(currentItem.imageResId)
-        itemTitle.text = currentItem.title
-        itemDescription.text = currentItem.description
+        holder.itemLogo.setImageResource(currentItem.imageResId)
+        holder.itemTitle.text = currentItem.title
+        holder.itemDescription.text = currentItem.description
 
         return view
     }
+
+    private data class ViewHolder(
+        val itemLogo: ImageView,
+        val itemTitle: TextView,
+        val itemDescription: TextView
+    )
 }
+

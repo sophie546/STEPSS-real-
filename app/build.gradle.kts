@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     kotlin("kapt")
+    id("kotlin-parcelize") // ✅ Correct way in Kotlin DSL
 }
 
 android {

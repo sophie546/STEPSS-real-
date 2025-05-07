@@ -49,24 +49,25 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:paddingStart="16dp">
+                    android:paddingStart="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hello"
+                        android:textColor="#898A8B"
+                        android:textStyle="bold"
+                        android:includeFontPadding="false"/>
 
                     <TextView
                         android:id="@+id/username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Vortex Goated"
+                        android:text="Zandruhux!"
+                        android:includeFontPadding="false"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"
                         android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/age_country"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="20 yrs · Philippines"
-                        android:textColor="#B0B0B0"
-                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <ImageButton

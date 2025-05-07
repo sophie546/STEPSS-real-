@@ -24,23 +24,24 @@ class RegisterActivity : Activity() {
         editTextConfirmPassword = findViewById(R.id.edit_text_confirm_password)
 
         val buttonSignUpReg = findViewById<Button>(R.id.button_SignUpReg)
+        val buttonLogin = findViewById<Button>(R.id.button_login)
+
         buttonSignUpReg.setOnClickListener {
             if (validateInputs()) {
                 val username = editTextUsername.text.toString().trim()
                 val password = editTextPassword.text.toString().trim()
                 saveUserData(username, password)
 
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
+                Toast.makeText(this, "User registered successfully!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish() // Prevent back navigation to registration
             }
         }
 
-        val buttonLogin = findViewById<Button>(R.id.button_login)
         buttonLogin.setOnClickListener {
-            Log.e("Sample Project", "Button is clicked!")
-            Toast.makeText(this, "Button is clicked!", Toast.LENGTH_LONG).show()
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            Log.d("RegisterActivity", "Login button clicked")
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 
@@ -50,42 +51,40 @@ class RegisterActivity : Activity() {
         val password = editTextPassword.text.toString().trim()
         val confirmPassword = editTextConfirmPassword.text.toString().trim()
 
-        if (username.isEmpty()) {
-            editTextUsername.error = "Username is required"
-            return false
-        }
-
-        if (password.isEmpty()) {
-            editTextPassword.error = "Password is required"
-            return false
-        }
-
-        if (confirmPassword.isEmpty()) {
-            editTextConfirmPassword.error = "Confirm Password is required"
-            return false
-        }
-
-        if (password != confirmPassword) {
-            editTextConfirmPassword.error = "Passwords do not match"
-            return false
+        when {
+            username.isEmpty() -> {
+                editTextUsername.error = "Username is required"
+                return false
+            }
+            password.isEmpty() -> {
+                editTextPassword.error = "Password is required"
+                return false
+            }
+            confirmPassword.isEmpty() -> {
+                editTextConfirmPassword.error = "Confirm Password is required"
+                return false
+            }
+            password != confirmPassword -> {
+                editTextConfirmPassword.error = "Passwords do not match"
+                return false
+            }
         }
 
         return true
     }
 
-    // SAVE USER INPUTTED DATA
+    // Save user data using SharedPreferences
     private fun saveUserData(username: String, password: String) {
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
+
         editor.putString("USERNAME", username)
         editor.putString("PASSWORD", password)
-
-        // Set default values for email, contact, and location (to be updated later)
-        editor.putString("EMAIL", null)
+        editor.putString("EMAIL", null) // will be set in EditProfilePage
         editor.putString("CONTACT", null)
         editor.putString("LOCATION", null)
+        editor.putString("PROFILE_IMAGE_URI", null) // default image will be shown if null
 
-        editor.apply() // Save data asynchronously
-        Toast.makeText(this, "User registered successfully!", Toast.LENGTH_SHORT).show()
+        editor.apply()
     }
 }

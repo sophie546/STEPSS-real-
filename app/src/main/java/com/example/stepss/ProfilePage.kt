@@ -1,11 +1,10 @@
 package com.example.stepss
 
-import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.net.Uri
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -13,10 +12,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.stepss.EditProfilePage
-import com.example.stepss.LoginActivity
-import com.example.stepss.ProfilePage2
-import com.example.stepss.R
+import com.example.stepss.data.ProfileData
 
 class ProfilePage : AppCompatActivity() {
     private lateinit var textViewName: TextView
@@ -29,9 +25,9 @@ class ProfilePage : AppCompatActivity() {
         setContentView(R.layout.profile_page)
         Log.d("ProfilePage", "Activity created")
 
-        sharedPreferences = getSharedPreferences("profile_prefs", MODE_PRIVATE)
+        // Consistently use "UserPrefs"
+        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
 
-        // Initialize views
         textViewName = findViewById(R.id.name)
         textViewEmail = findViewById(R.id.email_address)
         profileImageView = findViewById(R.id.profile_image)
@@ -41,8 +37,7 @@ class ProfilePage : AppCompatActivity() {
         val showProfile: LinearLayout = findViewById(R.id.profile_header)
         val backArrow: ImageView = findViewById(R.id.back_button)
 
-        // Set default profile image
-        profileImageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.aloria))
+        profileImageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.profile_picture))
 
         loadProfileData()
 
@@ -56,39 +51,39 @@ class ProfilePage : AppCompatActivity() {
         }
 
         editProfile.setOnClickListener {
+            val profileData = getCurrentProfileData()
             val intent = Intent(this, EditProfilePage::class.java)
-            intent.putExtra("CURRENT_NAME", textViewName.text.toString())
-            intent.putExtra("CURRENT_EMAIL", textViewEmail.text.toString())
+            intent.putExtra("PROFILE_DATA", profileData)
             startActivityForResult(intent, 1001)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
         showProfile.setOnClickListener {
+            val profileData = getCurrentProfileData()
             val intent = Intent(this, ProfilePage2::class.java)
-            intent.putExtra("CURRENT_NAME", textViewName.text.toString())
-            intent.putExtra("CURRENT_EMAIL", textViewEmail.text.toString())
+            intent.putExtra("PROFILE_DATA", profileData)
             startActivityForResult(intent, 1001)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
 
     private fun loadProfileData() {
-        val username = sharedPreferences.getString("profile_name", "Default Name")
-        val email = sharedPreferences.getString("profile_email", "")
+        val username = sharedPreferences.getString("USERNAME", null)
+        val email = sharedPreferences.getString("EMAIL", null)
+        val imageUriString = sharedPreferences.getString("PROFILE_IMAGE_URI", null)
 
-        textViewName.text = username ?: "Default Name"
+        textViewName.text = username ?: ""
+        textViewEmail.text = email ?: ""
 
-        // Display email only if it's not empty
-        textViewEmail.text = if (!email.isNullOrEmpty()) email else ""
-
-        // Load profile image if available
-        sharedPreferences.getString("profile_image_uri", null)?.let { uriString ->
-            try {
-                profileImageView.setImageURI(Uri.parse(uriString))
-            } catch (e: Exception) {
-                Log.e("ProfilePage", "Error loading profile image", e)
-                profileImageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.aloria))
+        try {
+            if (!imageUriString.isNullOrEmpty()) {
+                profileImageView.setImageURI(Uri.parse(imageUriString))
+            } else {
+                profileImageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.profile_picture))
             }
+        } catch (e: Exception) {
+            Log.e("ProfilePage", "Error loading profile image", e)
+            profileImageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.profile_picture))
         }
     }
 
@@ -96,25 +91,43 @@ class ProfilePage : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1001 && resultCode == RESULT_OK) {
             data?.let {
-                it.getStringExtra("NEW_NAME")?.let { name ->
-                    textViewName.text = name
-                    sharedPreferences.edit().putString("profile_name", name).apply()
-                }
-                it.getStringExtra("NEW_EMAIL")?.let { email ->
-                    textViewEmail.text = email
-                    sharedPreferences.edit().putString("profile_email", email).apply()
-                }
-                it.getStringExtra("PROFILE_IMAGE_URI")?.let { uriString ->
-                    try {
-                        profileImageView.setImageURI(Uri.parse(uriString))
-                        sharedPreferences.edit().putString("profile_image_uri", uriString).apply()
-                    } catch (e: Exception) {
-                        Log.e("ProfilePage", "Error setting profile image", e)
+                it.getParcelableExtra<ProfileData>("PROFILE_DATA")?.let { profile ->
+                    // Update UI
+                    textViewName.text = profile.name ?: ""
+                    textViewEmail.text = profile.email ?: ""
+                    profile.imageUri?.let { uri ->
+                        try {
+                            profileImageView.setImageURI(uri)
+                        } catch (e: Exception) {
+                            Log.e("ProfilePage", "Error setting profile image", e)
+                        }
+                    }
+
+                    // Save to SharedPreferences using UserPrefs keys
+                    with(sharedPreferences.edit()) {
+                        putString("USERNAME", profile.name)
+                        putString("EMAIL", profile.email)
+                        profile.imageUri?.let { uri -> putString("PROFILE_IMAGE_URI", uri.toString()) }
+                        apply()
                     }
                 }
             }
         }
     }
+
+    private fun getCurrentProfileData(): ProfileData {
+        val name = sharedPreferences.getString("USERNAME", null)
+        val password = sharedPreferences.getString("PASSWORD", null)
+        val email = sharedPreferences.getString("EMAIL", null)
+        val contact = sharedPreferences.getString("CONTACT", null)
+        val location = sharedPreferences.getString("LOCATION", null)
+        val uriString = sharedPreferences.getString("PROFILE_IMAGE_URI", null)
+        val uri = uriString?.let { Uri.parse(it) }
+
+        return ProfileData(name, password, email, contact, location, uri)
+    }
+
+
 
     private fun showLogoutConfirmation() {
         AlertDialog.Builder(this)

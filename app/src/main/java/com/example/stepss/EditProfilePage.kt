@@ -1,6 +1,7 @@
 package com.example.stepss
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import com.example.stepss.data.ProfileData
 import java.io.File
 
 class EditProfilePage : AppCompatActivity() {
@@ -23,15 +25,15 @@ class EditProfilePage : AppCompatActivity() {
 
     private var currentPhotoUri: Uri? = null
 
-    // Gallery launcher
-    private val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        uri?.let {
+    val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        if (uri != null) {
             profileImageView.setImageURI(uri)
             currentPhotoUri = uri
+        } else {
+            currentPhotoUri = null // optional safeguard
         }
     }
 
-    // Camera launcher
     private val cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
         if (success && currentPhotoUri != null) {
             profileImageView.setImageURI(currentPhotoUri)
@@ -42,48 +44,54 @@ class EditProfilePage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.edit_profile_page)
 
-        // Initialize views
         profileImageView = findViewById(R.id.profile_image)
         editProfileImageButton = findViewById(R.id.profile_image_view)
 
         editTextName = findViewById(R.id.edit_name)
-        editTextPassword = findViewById(R.id.edit_password)
         editTextEmail = findViewById(R.id.edit_email)
+        editTextPassword = findViewById(R.id.edit_password)
         editTextContact = findViewById(R.id.edit_contact)
         editTextAddress = findViewById(R.id.edit_location)
 
         val btnSave = findViewById<Button>(R.id.save_button)
         val backArrow: ImageButton = findViewById(R.id.back_button)
 
-        // Get current data passed from previous page
-        val currentName = intent.getStringExtra("CURRENT_NAME")
-        val currentPassword = intent.getStringExtra("CURRENT_PASSWORD")
-        val currentEmail = intent.getStringExtra("CURRENT_EMAIL")
-        val currentContact = intent.getStringExtra("CURRENT_CONTACT")
-        val currentLocation = intent.getStringExtra("CURRENT_LOCATION")
+        val profileData = intent.getParcelableExtra<ProfileData>("PROFILE_DATA")
+        if (profileData == null) {
+            // Handle the error gracefully, maybe show a message or handle the missing data scenario
+            Toast.makeText(this, "Profile data is missing!", Toast.LENGTH_SHORT).show()
+            finish()  // Optionally finish the activity if there's an issue
+        } else {
+            // Proceed with setting the data
+            editTextName.setText(profileData.name)
+            editTextPassword.setText(profileData.password)
+            editTextEmail.setText(profileData.email)
+            editTextContact.setText(profileData.contact)
+            editTextAddress.setText(profileData.location)
+            profileData.imageUri?.let {
+                profileImageView.setImageURI(it)
+                currentPhotoUri = it
+            }
+        }
 
-        // Set the data to the edit text fields
-        editTextName.setText(currentName)
-        editTextPassword.setText(currentPassword)
-        editTextEmail.setText(currentEmail)
-        editTextContact.setText(currentContact)
-        editTextAddress.setText(currentLocation)
-
-        // Back button
         backArrow.setOnClickListener { redirectToProfilePage() }
 
-        // Change profile photo
         editProfileImageButton.setOnClickListener { showImagePickerOptions() }
 
-        // Save button click
         btnSave.setOnClickListener {
+            val updatedProfileData = ProfileData(
+                name = editTextName.text.toString(),
+                password = editTextPassword.text.toString(),
+                email = editTextEmail.text.toString(),
+                contact = editTextContact.text.toString(),
+                location = editTextAddress.text.toString(),
+                imageUri = currentPhotoUri
+            )
+
+            saveUserData(updatedProfileData)
+
             val resultIntent = Intent().apply {
-                putExtra("NEW_NAME", editTextName.text.toString())
-                putExtra("NEW_PASSWORD", editTextPassword.text.toString())
-                putExtra("NEW_EMAIL", editTextEmail.text.toString())
-                putExtra("NEW_CONTACT", editTextContact.text.toString())
-                putExtra("NEW_LOCATION", editTextAddress.text.toString())
-                currentPhotoUri?.let { uri -> putExtra("PROFILE_IMAGE_URI", uri.toString()) }
+                putExtra("UPDATED_PROFILE_DATA", updatedProfileData)
             }
             setResult(RESULT_OK, resultIntent)
             finish()
@@ -97,7 +105,6 @@ class EditProfilePage : AppCompatActivity() {
                 when (which) {
                     0 -> takePhoto()
                     1 -> chooseFromGallery()
-                    2 -> {} // Cancel
                 }
             }
             show()
@@ -130,10 +137,23 @@ class EditProfilePage : AppCompatActivity() {
     }
 
     private fun redirectToProfilePage() {
-        Intent(this, ProfilePage::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        Intent(this, ProfilePage2::class.java).apply {
             startActivity(this)
             finish()
         }
+    }
+
+    private fun saveUserData(profileData: ProfileData) {
+        val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putString("USERNAME", profileData.name)
+        editor.putString("PASSWORD", profileData.password)
+        editor.putString("EMAIL", profileData.email)
+        editor.putString("CONTACT", profileData.contact)
+        editor.putString("LOCATION", profileData.location)
+        editor.putString("PROFILE_IMAGE_URI", profileData.imageUri?.toString())
+
+        editor.apply()
     }
 }
