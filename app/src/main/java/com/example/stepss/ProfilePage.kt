@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +36,19 @@ class ProfilePage : AppCompatActivity() {
         val editProfile: LinearLayout = findViewById(R.id.edit_profile_button)
         val showProfile: LinearLayout = findViewById(R.id.profile_header)
         val backArrow: ImageView = findViewById(R.id.back_button)
+        val achievements_button: LinearLayout = findViewById(R.id.achievements_button)
+        val activitiesButton: LinearLayout = findViewById(R.id.activities_button)
+
+
+        activitiesButton.setOnClickListener {
+            val intent = Intent(this, ActivityProgress::class.java)
+            startActivity(intent)
+        }
+
+        achievements_button.setOnClickListener {
+            val intent = Intent(this, Achievements::class.java)
+            startActivity(intent)
+        }
 
         profileImageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.profile_picture))
 

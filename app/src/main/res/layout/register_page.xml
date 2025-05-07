@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="20dp">
 
+<!--        GI UPDATE NA KONI-->
 
         <ImageView
             android:id="@+id/gifViewRegister"

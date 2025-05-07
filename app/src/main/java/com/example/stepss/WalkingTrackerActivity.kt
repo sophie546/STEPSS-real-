@@ -182,7 +182,6 @@ class WalkingTrackerActivity : Activity(), SensorEventListener {
         }
 
         initialSteps = currentSteps
-        currentSteps = 0
         updateStepCountDisplay()
         btnReset.isEnabled = false
         isTrackingVisible = false
@@ -191,6 +190,7 @@ class WalkingTrackerActivity : Activity(), SensorEventListener {
         btnShowTrack.isEnabled = false
         Toast.makeText(this, "Counter reset to zero", Toast.LENGTH_SHORT).show()
     }
+
 
     private fun updateStepCountDisplay() {
         val stepsSinceReset = currentSteps - initialSteps

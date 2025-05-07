@@ -90,7 +90,8 @@ class LandingPageActivity : AppCompatActivity() {
     }
 
     private fun updateUsernameDisplay() {
-        val savedUsername = sharedPreferences.getString("USERNAME", "User")
+        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+        val savedUsername = sharedPreferences.getString("USERNAME", "")
         usernameTextView.text = "$savedUsername!"
         Log.d("LandingPage", "Updated username display: $savedUsername")
     }
