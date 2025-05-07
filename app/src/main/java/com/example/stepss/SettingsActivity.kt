@@ -54,7 +54,6 @@ class SettingsActivity : AppCompatActivity() {
 
         sharedPreferences = getSharedPreferences("profile_prefs", MODE_PRIVATE)
 
-        // Initialize views
 
 
         loadProfileData()
@@ -64,12 +63,11 @@ class SettingsActivity : AppCompatActivity() {
         val logoutOption = findViewById<Button>(R.id.button_logout_button)
         val backArrow = findViewById<LinearLayout>(R.id.back_arrow)
         val aboutDevs = findViewById<LinearLayout>(R.id.option_about_devs)
-        val historyOption = findViewById<LinearLayout>(R.id.option_history_container)
+        val progressActivity = findViewById<LinearLayout>(R.id.option_history_container)
 
         // Set click listeners
         notificationsOption.setOnClickListener { showNotificationPermissionDialog() }
-        //NAVIGATE TO THE ACTIVITIES CUSTOM LIST VIEW
-        //historyOption.setOnClickListener { navigateTo(CustomListViewActivity::class.java) }
+        progressActivity.setOnClickListener { navigateTo(ActivityProgress::class.java) }
         logoutOption.setOnClickListener { showLogoutConfirmation() }
         backArrow.setOnClickListener { finishWithAnimation() }
         aboutDevs.setOnClickListener { navigateTo(DevelopersActivity::class.java) }
