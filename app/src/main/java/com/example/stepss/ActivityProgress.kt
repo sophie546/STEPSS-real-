@@ -29,27 +29,21 @@ class ActivityProgress : Activity() {
         progressButton = findViewById(R.id.button_progress)
         val startButton: ImageButton = findViewById(R.id.button_start)
 
-        // Set initial state (progress button selected)
         setSelectedButton(progressButton)
 
-        // Add zoom effect to all buttons
         addZoomEffect(profileButton)
         addZoomEffect(homeButton)
         addZoomEffect(startButton)
         addZoomEffect(progressButton)
 
-        // Get current session data
         val stepCount = intent.getStringExtra("STEP_COUNT") ?: "0"
         val distance = intent.getStringExtra("DISTANCE") ?: "0"
 
-        // Display current session
         findViewById<TextView>(R.id.tvStepCountProgress).text = "Steps: $stepCount"
         findViewById<TextView>(R.id.tvDistanceProgress).text = "Distance: $distance km"
 
-        // Add to history (you'll need to implement proper storage)
         addToHistory(stepCount, distance)
 
-        // Load and display history
         displayHistory()
 
         profileButton.setOnClickListener {
@@ -72,7 +66,6 @@ class ActivityProgress : Activity() {
 
         progressButton.setOnClickListener {
             setSelectedButton(progressButton)
-            // Already on progress page
         }
 
         startButton.setOnClickListener {
@@ -90,7 +83,7 @@ class ActivityProgress : Activity() {
         val dateFormat = SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault())
         val date = dateFormat.format(Date())
 
-        // Store in SharedPreferences (simple example)
+        // Store Steps Data in SharedPreferences
         val sharedPref = getSharedPreferences("StepHistory", MODE_PRIVATE)
         with(sharedPref.edit()) {
             putString("last_session_$date", "Steps: $steps, Distance: $distance km")

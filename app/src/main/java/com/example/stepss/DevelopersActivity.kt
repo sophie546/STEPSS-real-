@@ -20,22 +20,18 @@ class DevelopersActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.developers_page)
 
-        // Initialize views
         val backButton: ImageView = findViewById(R.id.back_button)
         homeButton = findViewById(R.id.button_home)
         val startButton: ImageButton = findViewById(R.id.button_start)
         progressButton = findViewById(R.id.button_progress)
 
-        // Set initial state (none selected as this isn't a main navigation page)
         setSelectedButton(null)
 
-        // Add zoom effect to all buttons
         addZoomEffect(backButton as ImageButton)
         addZoomEffect(homeButton)
         addZoomEffect(startButton)
         addZoomEffect(progressButton)
 
-        // Set click listeners
         backButton.setOnClickListener {
             navigateTo(LandingPageActivity::class.java)
             finish()
@@ -61,10 +57,8 @@ class DevelopersActivity : Activity() {
 
     private fun navigateTo(targetClass: Class<*>) {
         val intent = Intent(this, targetClass)
-        // Clear any flags that might cause issues
         intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         startActivity(intent)
-        // Optional: Add animation
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
@@ -73,29 +67,9 @@ class DevelopersActivity : Activity() {
         homeButton.isSelected = false
         progressButton.isSelected = false
 
-        // Set the selected button if not null
         selectedButton?.isSelected = true
     }
 
-//    private fun showPopupMenu(view: View) {
-//        // Use ContextThemeWrapper to ensure proper theme
-//        val wrapper = ContextThemeWrapper(this, R.style.Theme_STEPSS)
-//        val popupMenu = PopupMenu(wrapper, view)
-//
-//        popupMenu.setOnMenuItemClickListener { item: MenuItem ->
-//            when (item.itemId) {
-//                R.id.nav_settings -> {
-//                    navigateTo(SettingsActivity::class.java)
-//                    true
-//                }
-//                R.id.nav_about -> {
-//                    // Already on developers page
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
-//    }
 
     private fun showConfirmLogoutDialog() {
         AlertDialog.Builder(this)

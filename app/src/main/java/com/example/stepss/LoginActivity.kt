@@ -24,7 +24,6 @@ class LoginActivity : Activity() {
         val gifImageView = findViewById<ImageView>(R.id.gifViewLogin)
         Glide.with(this).asGif().load(R.drawable.walkinganimation_nobackground2).into(gifImageView)
 
-        // Initialize views
         editTextUsername = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
         buttonSignUpLogin = findViewById(R.id.button_SignUpLogin)
@@ -50,7 +49,6 @@ class LoginActivity : Activity() {
             }
         }
 
-        // Navigate to RegisterActivity
         buttonCreateAccount.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()

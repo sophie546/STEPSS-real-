@@ -227,7 +227,6 @@ class WalkingTrackerActivity : Activity(), SensorEventListener {
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        // Optional accuracy handling
     }
 
     override fun onPause() {

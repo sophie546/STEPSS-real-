@@ -21,27 +21,22 @@ class LandingPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.landing_page)
 
-        // Initialize SharedPreferences
+        //SharedPreferences for Users Data
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
 
-        // Setup animated GIF
+        //GIF Animation
         val gifImageView = findViewById<ImageView>(R.id.gifImageView)
         Glide.with(this).asGif().load(R.drawable.water).into(gifImageView)
 
-        // Initialize buttons
         val profileButton = findViewById<ImageButton>(R.id.profile_button)
         val startButton = findViewById<ImageButton>(R.id.button_start)
         settingsButton = findViewById(R.id.icon_settings)
         homeButton = findViewById(R.id.button_home)
         progressButton = findViewById(R.id.button_progress)
-
-        // Initialize username text view
         usernameTextView = findViewById(R.id.username)
 
-        // Update username display
         updateUsernameDisplay()
 
-        // Set default button state
         setSelectedButton(homeButton)
 
         // Setup navigation with animations
@@ -67,15 +62,15 @@ class LandingPageActivity : AppCompatActivity() {
             Toast.makeText(this, "Already on home page", Toast.LENGTH_SHORT).show()
         }
 
-        // Set up custom list view for achievements
+        //Custom List View for Challenge Yourself
         setupAchievementsList()
 
+        //SharedPreferences for StepHistory & Updates UI accordingly
         sharedPreferences = getSharedPreferences("StepHistory", MODE_PRIVATE)
 
         val mostRecentSteps = sharedPreferences.getString("last_steps", "0")
         val mostRecentDistance = sharedPreferences.getString("last_distance", "0")
 
-        // Update the UI with the most recent data
         val distanceTextView = findViewById<TextView>(R.id.txt_distance)
         val stepsTextView = findViewById<TextView>(R.id.txt_steps)
 
@@ -83,9 +78,9 @@ class LandingPageActivity : AppCompatActivity() {
         stepsTextView.text = "$mostRecentSteps"
     }
 
+    // Update username display when returning to this activity
     override fun onResume() {
         super.onResume()
-        // Update username display when returning to this activity
         updateUsernameDisplay()
     }
 

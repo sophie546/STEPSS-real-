@@ -34,7 +34,7 @@ class EditProfilePage : AppCompatActivity() {
             profileImageView.setImageURI(uri)
             currentPhotoUri = uri
         } else {
-            currentPhotoUri = null // optional safeguard
+            currentPhotoUri = null
         }
     }
 
@@ -64,7 +64,7 @@ class EditProfilePage : AppCompatActivity() {
         if (profileData == null) {
             // Handle the error gracefully, maybe show a message or handle the missing data scenario
             Toast.makeText(this, "Profile data is missing!", Toast.LENGTH_SHORT).show()
-            finish()  // Optionally finish the activity if there's an issue
+            finish()
         } else {
             // Proceed with setting the data
             editTextName.setText(profileData.name)

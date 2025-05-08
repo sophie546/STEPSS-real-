@@ -193,11 +193,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Achievements"
+                android:text="Challenge Yourself!"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
@@ -208,12 +209,14 @@
                 <ListView
                     android:id="@+id/list_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:divider="@android:color/darker_gray"
                     android:dividerHeight="1dp"
                     android:padding="8dp"
                     android:cacheColorHint="@android:color/transparent"/>
             </LinearLayout>
+
 
             <!-- Today's Motivation -->
             <LinearLayout

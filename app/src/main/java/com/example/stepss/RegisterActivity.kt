@@ -85,10 +85,11 @@ class RegisterActivity : Activity() {
 
         editor.putString("USERNAME", username)
         editor.putString("PASSWORD", password)
-        editor.putString("EMAIL", null) // will be set in EditProfilePage
+        //Values will be initially set to null, can be changed in the edit profile page
+        editor.putString("EMAIL", null)
         editor.putString("CONTACT", null)
         editor.putString("LOCATION", null)
-        editor.putString("PROFILE_IMAGE_URI", null) // default image will be shown if null
+        editor.putString("PROFILE_IMAGE_URI", null)
 
         editor.apply()
     }
