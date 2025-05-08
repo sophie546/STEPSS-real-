@@ -76,8 +76,6 @@ class ActivityProgress : Activity() {
     }
 
 
-
-
     private fun addToHistory(steps: String, distance: String) {
         // Get current date/time
         val dateFormat = SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault())

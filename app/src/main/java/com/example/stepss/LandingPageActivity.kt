@@ -2,6 +2,7 @@ package com.example.stepss
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
@@ -15,27 +16,31 @@ class LandingPageActivity : AppCompatActivity() {
     private lateinit var homeButton: ImageButton
     private lateinit var progressButton: ImageButton
     private lateinit var usernameTextView: TextView
+    private lateinit var profileButton: ImageButton
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.landing_page)
 
-        //SharedPreferences for Users Data
+        // SharedPreferences for Users Data
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
 
-        //GIF Animation
-        val gifImageView = findViewById<ImageView>(R.id.gifImageView)
-        Glide.with(this).asGif().load(R.drawable.water).into(gifImageView)
-
-        val profileButton = findViewById<ImageButton>(R.id.profile_button)
-        val startButton = findViewById<ImageButton>(R.id.button_start)
+        // Initialize views
+        profileButton = findViewById(R.id.profile_button)
         settingsButton = findViewById(R.id.icon_settings)
         homeButton = findViewById(R.id.button_home)
         progressButton = findViewById(R.id.button_progress)
         usernameTextView = findViewById(R.id.username)
 
-        updateUsernameDisplay()
+        // GIF Animation
+        val gifImageView = findViewById<ImageView>(R.id.gifImageView)
+        Glide.with(this).asGif().load(R.drawable.water).into(gifImageView)
+
+        val startButton = findViewById<ImageButton>(R.id.button_start)
+
+        // Load profile data immediately
+        loadProfileData()
 
         setSelectedButton(homeButton)
 
@@ -62,14 +67,13 @@ class LandingPageActivity : AppCompatActivity() {
             Toast.makeText(this, "Already on home page", Toast.LENGTH_SHORT).show()
         }
 
-        //Custom List View for Challenge Yourself
+        // Custom List View for Challenge Yourself
         setupAchievementsList()
 
-        //SharedPreferences for StepHistory & Updates UI accordingly
-        sharedPreferences = getSharedPreferences("StepHistory", MODE_PRIVATE)
-
-        val mostRecentSteps = sharedPreferences.getString("last_steps", "0")
-        val mostRecentDistance = sharedPreferences.getString("last_distance", "0")
+        // SharedPreferences for StepHistory & Updates UI accordingly
+        val stepHistoryPrefs = getSharedPreferences("StepHistory", MODE_PRIVATE)
+        val mostRecentSteps = stepHistoryPrefs.getString("last_steps", "0")
+        val mostRecentDistance = stepHistoryPrefs.getString("last_distance", "0")
 
         val distanceTextView = findViewById<TextView>(R.id.txt_distance)
         val stepsTextView = findViewById<TextView>(R.id.txt_steps)
@@ -78,17 +82,32 @@ class LandingPageActivity : AppCompatActivity() {
         stepsTextView.text = "$mostRecentSteps"
     }
 
-    // Update username display when returning to this activity
     override fun onResume() {
         super.onResume()
-        updateUsernameDisplay()
+        loadProfileData()
     }
 
-    private fun updateUsernameDisplay() {
-        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+    private fun loadProfileData() {
+        // Load username
         val savedUsername = sharedPreferences.getString("USERNAME", "")
         usernameTextView.text = "$savedUsername!"
         Log.d("LandingPage", "Updated username display: $savedUsername")
+
+        // Load profile image
+        val imageUriString = sharedPreferences.getString("PROFILE_IMAGE_URI", null)
+        if (!imageUriString.isNullOrEmpty()) {
+            try {
+                Glide.with(this)
+                    .load(Uri.parse(imageUriString))
+                    .circleCrop()
+                    .into(profileButton)
+            } catch (e: Exception) {
+                Log.e("LandingPage", "Error loading profile image", e)
+                profileButton.setImageResource(R.drawable.profile_picture)
+            }
+        } else {
+            profileButton.setImageResource(R.drawable.profile_picture)
+        }
     }
 
     private fun setupAchievementsList() {

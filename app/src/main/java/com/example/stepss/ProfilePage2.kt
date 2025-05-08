@@ -98,4 +98,5 @@ class ProfilePage2 : AppCompatActivity() {
             }
         }
     }
+
 }

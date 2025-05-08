@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <external-files-path name="my_images" path="Pictures" />
+    <!-- External files directory -->
+    <external-path name="external_files" path="." />
+
+    <!-- External storage Pictures directory -->
+    <external-path name="external_pictures" path="Pictures" />
+
+    <!-- App-specific external files directory -->
+    <external-files-path name="my_app_images" path="Pictures" />
+
+    <!-- App-specific cache directory -->
+    <cache-path name="my_app_cache" path="/" />
+
+    <!-- Files directory -->
+    <files-path name="my_app_files" path="/" />
 </paths>
